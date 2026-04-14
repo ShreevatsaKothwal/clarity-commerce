@@ -1,0 +1,40 @@
+[
+  {
+    "id": "prod_1",
+    "title": "Nomad 30L Travel Backpack",
+    "price": 129.99,
+    "description": "A durable, water-resistant 30L backpack perfect for weekend trips. Features a dedicated 15-inch laptop sleeve, padded shoulder straps, and a breathable mesh back panel. Dimensions: 20 x 13 x 8 inches. Weight: 2.5 lbs.",
+    "category": "Bags & Luggage",
+    "merchant_intent": "Sell a high-quality, fully-featured 30-liter travel backpack suitable for tech-savvy travelers taking weekend trips."
+  },
+  {
+    "id": "prod_2",
+    "title": "Running Shoes",
+    "price": 89.99,
+    "merchant_intent": "Sell premium athletic running shoes designed for daily joggers and runners."
+  },
+  {
+    "id": "prod_3",
+    "title": "Men's Black Leather Wallet",
+    "price": 45.00,
+    "description": "Stay stylish with this beautiful brown synthetic leather wallet. Features 6 card slots and a clear ID window. Designed for everyday use.",
+    "category": "Accessories",
+    "merchant_intent": "Sell an affordable but stylish men's wallet made of brown synthetic leather for daily casual use."
+  },
+  {
+    "id": "prod_4",
+    "title": "Quantum XF-900",
+    "price": 899.00,
+    "description": "XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV. The sub-assembly integration allows for zero-latency phase shifting in the Q-band spectrum. Manufactured in facility 7B.",
+    "category": "Electronics",
+    "merchant_intent": "Sell a high-end, zero-latency phase shifting electronic component to industrial tech manufacturers."
+  },
+  {
+    "id": "prod_5",
+    "title": "Aero Lite Weekend Carry-on Suitcase",
+    "price": 150.00,
+    "description": "The perfect lightweight suitcase for your weekend getaways. Features omni-directional spinner wheels, a TSA-approved lock, and a sleek hard-shell exterior. Easily fits in the overhead bin of most major airlines.",
+    "category": "Luggage",
+    "merchant_intent": "Sell a regulation-compatible, lightweight hard-shell carry-on suitcase for frequent airline travelers."
+  }
+]

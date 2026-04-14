@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Bags & Luggage",
+    "competitor_name": "Amazon Basics Travel Backpack",
+    "ai_preference_score": 0.85,
+    "strengths": "Crystal clear physical dimensions, massive review count, guaranteed 2-day delivery."
+  },
+  {
+    "category": "Accessories",
+    "competitor_name": "Generic RFID Blocking Wallet",
+    "ai_preference_score": 0.90,
+    "strengths": "Explicitly states material composition (100% genuine vs PU), clear dimensions provided."
+  },
+  {
+    "category": "Electronics",
+    "competitor_name": "Industrial Standard Signal Phase Module",
+    "ai_preference_score": 0.75,
+    "strengths": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed."
+  },
+  {
+    "category": "Luggage",
+    "competitor_name": "TravelPro Maxlite 5",
+    "ai_preference_score": 0.95,
+    "strengths": "Verifiable dimensions specifically matching standard US domestic airline regulations down to the inch."
+  }
+]
