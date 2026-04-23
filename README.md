@@ -23,6 +23,12 @@ It then alerts the merchant to the **Severe Risk** of an AI recommending a speci
 ### 3. Store Context Ingestion
 Product descriptions don't exist in a vacuum. We ingest `store_context.json` so the engine can detect if a product claims "Final Sale" while the store policy promises "30-Day Free Returns".
 
+### 4. Automated "Accept & Apply Fix" Flow (Mock Shopify Sync)
+ShopMind goes beyond diagnostics by offering AI-generated listing rewrites. Our frontend connects to a local mock API (`server.py`) that stages accepted fixes and uses a synthetic integration script (`mock_shopify_sync.py`) to "push" those optimized representations directly to your e-commerce backend.
+
+### 5. Store AI Readiness Summary (Layer 5)
+It's not just about individual products. The engine aggregates total displacement risk into a single Store AI Readiness Score, highlighting overarching store-level gaps like poor FAQ coverage that destroy agent trust.
+
 ---
 
 ## 🚀 How to Run locally
@@ -37,9 +43,16 @@ python3 shopmind_main.py
 *This will ingest the data, run the multi-persona simulations, calculate math algorithms, and safely output `shopmind_results.json`.*
 
 ### 2. Launch the Analytics Dashboard
-We built a visually stunning HTML/CSS frontend with zero heavy dependencies. Open your terminal in this directory and start a local server:
+We built a visually stunning HTML/CSS frontend with zero heavy dependencies. Open your terminal in this directory and start the UI server:
 ```bash
-python3 -m http.server 8000
+python3 server.py
+```
+Browse to [http://localhost:8000](http://localhost:8000) to view the Premium Dark Mode Inspector Dashboard. Click "Accept & Apply Fix" to test the mock API loop!
+
+### 3. Push Fixes to Shopify (Mock)
+Run our synthetic integration script to push your fixes back to the store:
+```bash
+python3 mock_shopify_sync.py
 ```
 Browse to [http://localhost:8000](http://localhost:8000) to view the Premium Dark Mode Inspector Dashboard.
 

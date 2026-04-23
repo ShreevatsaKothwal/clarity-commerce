@@ -22,5 +22,17 @@
     "competitor_name": "TravelPro Maxlite 5",
     "ai_preference_score": 0.95,
     "strengths": "Verifiable dimensions specifically matching standard US domestic airline regulations down to the inch."
+  },
+  {
+    "category": "Footwear",
+    "competitor_name": "Nike Revolution 6",
+    "ai_preference_score": 0.88,
+    "strengths": "Detailed sizing charts, specific materials (breathable mesh), and explicit intended use (daily running)."
+  },
+  {
+    "category": "Fitness",
+    "competitor_name": "Manduka PRO Yoga Mat",
+    "ai_preference_score": 0.92,
+    "strengths": "Explicit dimensions, precise material density specifications, and lifetime warranty details."
   }
 ]

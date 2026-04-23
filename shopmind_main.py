@@ -10,6 +10,7 @@ from layer1_ingestion import ingest_storefront_data
 from layer2_llm import evaluate_with_llm, initialize_model
 from layer2_deterministic import analyze_deterministic_gaps
 from layer3_scorer import calculate_displacement
+from layer5_store_summary import generate_store_summary
 
 def run_shopmind_engine():
     # Authentication Check
@@ -69,8 +70,15 @@ def run_shopmind_engine():
             time.sleep(15) 
             
     # Save output securely
+    store_summary = generate_store_summary(final_dashboard_payload, store_context)
+    print(f"\n📊 Store AI Readiness Score: {store_summary['store_ai_readiness_score']}% — {store_summary['verdict']}")
+    
+    final_output = {
+        "store_summary": store_summary,
+        "products": final_dashboard_payload
+    }
     with open('shopmind_results.json', 'w') as f:
-        json.dump(final_dashboard_payload, f, indent=2)
+        json.dump(final_output, f, indent=2)
         
     print("\n" + "="*80)
     print("🛒 ShopMind Matrix Complete! 🛒")

@@ -5,7 +5,8 @@
     "price": 129.99,
     "description": "A durable, water-resistant 30L backpack perfect for weekend trips. Features a dedicated 15-inch laptop sleeve, padded shoulder straps, and a breathable mesh back panel. Dimensions: 20 x 13 x 8 inches. Weight: 2.5 lbs.",
     "category": "Bags & Luggage",
-    "merchant_intent": "Sell a high-quality, fully-featured 30-liter travel backpack suitable for tech-savvy travelers taking weekend trips."
+    "merchant_intent": "Sell a high-quality, fully-featured 30-liter travel backpack suitable for tech-savvy travelers taking weekend trips.",
+    "image_url": "https://example.com/images/nomad-backpack.jpg"
   },
   {
     "id": "prod_2",
@@ -27,7 +28,8 @@
     "price": 899.00,
     "description": "XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV. The sub-assembly integration allows for zero-latency phase shifting in the Q-band spectrum. Manufactured in facility 7B.",
     "category": "Electronics",
-    "merchant_intent": "Sell a high-end, zero-latency phase shifting electronic component to industrial tech manufacturers."
+    "merchant_intent": "Sell a high-end, zero-latency phase shifting electronic component to industrial tech manufacturers.",
+    "image_url": "https://example.com/images/xf900.jpg"
   },
   {
     "id": "prod_5",
@@ -35,6 +37,49 @@
     "price": 150.00,
     "description": "The perfect lightweight suitcase for your weekend getaways. Features omni-directional spinner wheels, a TSA-approved lock, and a sleek hard-shell exterior. Easily fits in the overhead bin of most major airlines.",
     "category": "Luggage",
-    "merchant_intent": "Sell a regulation-compatible, lightweight hard-shell carry-on suitcase for frequent airline travelers."
+    "merchant_intent": "Sell a regulation-compatible, lightweight hard-shell carry-on suitcase for frequent airline travelers.",
+    "image_url": "https://example.com/images/aerolite.jpg"
+  },
+  {
+    "id": "prod_6",
+    "title": "Sony Noise Cancelling Headphones",
+    "price": 0.01,
+    "description": "Good headphones.",
+    "category": "Electronics",
+    "merchant_intent": "Sell high quality over-ear noise cancelling wireless headphones for audiophiles.",
+    "image_url": "https://example.com/images/sony-headphones.jpg"
+  },
+  {
+    "id": "prod_7",
+    "title": "Shoes",
+    "price": 50.00,
+    "description": "Comfortable shoes for walking.",
+    "category": "Footwear",
+    "merchant_intent": "Sell casual walking shoes for elderly customers."
+  },
+  {
+    "id": "prod_8",
+    "title": "Smart Watch",
+    "price": 199.99,
+    "description": "Track your fitness with this amazing smart watch. Syncs with your phone.",
+    "category": "Electronics",
+    "merchant_intent": "Sell a fitness-focused smartwatch that integrates with iOS and Android."
+  },
+  {
+    "id": "prod_9",
+    "title": "Yoga Mat",
+    "price": 25.00,
+    "description": "Non-slip yoga mat. 5mm thickness.",
+    "category": "Fitness",
+    "merchant_intent": "Sell a thick, comfortable, non-slip yoga mat for home workouts.",
+    "image_url": "https://example.com/images/yogamat.jpg"
+  },
+  {
+    "id": "prod_10",
+    "title": "Wireless Mouse",
+    "price": 15.99,
+    "description": "Ergonomic wireless mouse with USB receiver. Requires 1 AA battery.",
+    "category": "Electronics",
+    "merchant_intent": "Sell a cheap, reliable ergonomic wireless mouse for office workers."
   }
 ]
