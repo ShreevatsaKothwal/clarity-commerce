@@ -1,3 +1,4 @@
+console.log("app.js loaded at the top level");
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('productGrid');
     const modal = document.getElementById('inspectorModal');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // CORS Fallback warning
             grid.innerHTML = `
                 <div style="background: var(--bg-danger); padding: 2rem; border-radius: 12px; border: 1px solid #fecaca; width: 100%; grid-column: 1 / -1; color: var(--text-danger);">
-                    <h3 style="margin-bottom: 1rem;">⚠️ Cross-Origin Request Blocked</h3>
+                    <h3 style="margin-bottom: 1rem;">Cross-Origin Request Blocked</h3>
                     <p style="margin-bottom: 1rem;">You cannot load local JSON files directly via the file:// protocol in modern browsers for security reasons.</p>
                     <p>Instead of double-clicking index.html, run a quick local server in your terminal:</p>
                     <code style="background: rgba(0,0,0,0.05); padding: 0.5rem; display: block; margin-top: 1rem; border-radius: 4px; color: var(--text-primary);">python3 server.py</code>
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="card-footer">
                     <span>Impact Score: ${p.impact_score}</span>
-                    <span style="color:var(--color-primary); font-weight: 500;">Inspect ➔</span>
+                    <span style="color:var(--color-primary); font-weight: 500;">Inspect</span>
                 </div>
             `;
             
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const warningEl = document.getElementById('summaryWarning');
                 if (data.store_summary.store_level_warning) {
-                    warningEl.innerText = `⚠️ ${data.store_summary.store_level_warning}`;
+                    warningEl.innerText = `${data.store_summary.store_level_warning}`;
                 } else {
                     warningEl.innerText = "";
                 }
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(data.verdict) {
                     const cleanName = personaName.replace('_', ' ').toUpperCase();
                     const vClass = data.verdict.toLowerCase() === 'buy' ? 'buy' : 'reject';
-                    const icon = vClass === 'buy' ? '✔' : '❌';
+                    const icon = vClass === 'buy' ? 'Buy' : 'Reject';
                     personasHtml += `<div class="decision-row ${vClass}">
                         <span class="decision-icon">${icon}</span> 
                         <span class="decision-name">${cleanName}</span> 
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } else {
-            personasHtml = '<div class="decision-row reject"><span class="decision-icon">⚠️</span> <span class="decision-name">RATE LIMIT ERROR</span></div>';
+            personasHtml = '<div class="decision-row reject"><span class="decision-icon"></span> <span class="decision-name">RATE LIMIT ERROR</span></div>';
         }
 
         let issuesHtml = '';
@@ -162,14 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     <!-- SECTION 1: RISK ALERT -->
                     <div class="insight-section risk-banner">
-                        <h3>⚠️ Risk: High Displacement</h3>
+                        <h3>Risk: High Displacement</h3>
                         <p>${p.displacement_risk}</p>
                         <div class="competitor-text"><strong>Rival Advantage:</strong> ${p.competitor_advantage}</div>
                     </div>
 
                     <!-- SECTION 2: AI DECISION SUMMARY -->
                     <div class="insight-section">
-                        <h3>🤖 AI Decision Summary</h3>
+                        <h3>AI Decision Summary</h3>
                         <div class="ai-decision-list">
                             ${personasHtml}
                         </div>
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <!-- SECTION 3: KEY ISSUES -->
                     <div class="insight-section">
-                        <h3>⚙️ Key Issues Detected</h3>
+                        <h3>Key Issues Detected</h3>
                         <ul class="key-issues-list">
                             ${issuesHtml}
                         </ul>
@@ -185,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <!-- SECTION 4: IMPROVED LISTING -->
                     <div class="insight-section">
-                        <h3>💡 Improved Listing</h3>
+                        <h3>Improved Listing</h3>
                         <div class="improved-listing-box">
                             ${fixHtml}
                         </div>
@@ -220,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(res => res.json())
             .then(data => {
-                applyBtn.innerText = "✅ Listing Applied";
+                applyBtn.innerText = "Listing Applied";
                 applyBtn.style.background = "var(--color-success)";
                 
                 // Visual update to the card in grid
@@ -251,10 +252,176 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Modal Events
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
     modal.addEventListener('click', (e) => {
         if(e.target === modal) modal.classList.remove('active');
     });
+
+    console.log("Setting up event listeners for product form...");
+    const openBtn = document.getElementById('openFormBtn');
+    console.log("openFormBtn element:", openBtn);
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            console.log("openFormBtn clicked!");
+            document.getElementById('productFormOverlay').classList.add('active');
+        });
+    }
+
+    document.getElementById('closeFormBtn').addEventListener('click', () => {
+        document.getElementById('productFormOverlay').classList.remove('active');
+    });
+
+    document.getElementById('submitProductBtn').addEventListener('click', async () => {
+        const title = document.getElementById('f_title').value.trim();
+        const price = parseFloat(document.getElementById('f_price').value);
+        const category = document.getElementById('f_category').value;
+        const description = document.getElementById('f_desc').value.trim();
+        const merchant_intent = document.getElementById('f_intent').value.trim();
+        const image_url = document.getElementById('f_image').value.trim();
+
+        if (!title || !category) {
+            alert('Please fill in at least Title and Category.');
+            return;
+        }
+
+        const product = {
+            id: 'live_' + Date.now(),
+            title, price, category, description, merchant_intent,
+            image_url: image_url || null
+        };
+
+        document.getElementById('productFormOverlay').classList.remove('active');
+        document.getElementById('analysisOverlay').classList.add('active');
+        document.getElementById('analysisResult').style.display = 'none';
+
+        await runLiveAnalysis(product);
+    });
+
+    async function runLiveAnalysis(product) {
+        const stepsContainer = document.getElementById('analysisSteps');
+        stepsContainer.innerHTML = '';
+
+        const steps = [
+            { id: 'step1', icon: '', text: 'Ingesting product data into audit context...' },
+            { id: 'step2', icon: '', text: 'Running deterministic rule engine (12 checks)...' },
+            { id: 'step3', icon: '', text: 'Simulating AI buyer personas (Travel Planner, Deal Finder, Stylist)...' },
+            { id: 'step4', icon: '', text: 'Calculating Competitive Displacement Score...' },
+            { id: 'step5', icon: '', text: 'Updating Store AI Readiness Score...' },
+        ];
+
+        // Render all steps as pending
+        steps.forEach(s => {
+            stepsContainer.innerHTML += `
+                <div class="analysis-step pending" id="${s.id}">
+                    <span class="step-icon">${s.icon}</span>
+                    <span class="step-text">${s.text}</span>
+                    <span class="step-status">Pending</span>
+                </div>
+            `;
+        });
+
+        // Animate each step completing
+        for (let i = 0; i < steps.length; i++) {
+            await delay(900);
+            const el = document.getElementById(steps[i].id);
+            el.classList.remove('pending');
+            el.classList.add('done');
+            el.querySelector('.step-status').innerText = 'Done';
+        }
+
+        // Now call the real backend
+        try {
+            const response = await fetch('/api/analyze_product', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            });
+            const result = await response.json();
+            showAnalysisResult(result, product);
+        } catch (err) {
+            document.getElementById('analysisResult').style.display = 'block';
+            document.getElementById('analysisResult').innerHTML = `<p style="color:red;">Analysis failed. Is the server running?</p>`;
+        }
+    }
+
+    function delay(ms) { return new Promise(res => setTimeout(res, ms)); }
+
+    function showAnalysisResult(result, product) {
+        const container = document.getElementById('analysisResult');
+        const priorityClass = result.priority ? result.priority.toLowerCase() : 'medium';
+
+        let issuesHtml = '';
+        if (result.deterministic_issues && result.deterministic_issues.length > 0) {
+            result.deterministic_issues.forEach(i => { issuesHtml += `<li>• ${i}</li>`; });
+        } else {
+            issuesHtml = '<li style="color:var(--color-success)">• No rule violations detected.</li>';
+        }
+
+        let personasHtml = '';
+        if (result.llm_persona_verdicts && Object.keys(result.llm_persona_verdicts).length > 0) {
+            for (let [name, data] of Object.entries(result.llm_persona_verdicts)) {
+                const vClass = data.verdict === 'buy' ? 'buy' : 'reject';
+                const icon = vClass === 'buy' ? 'Buy' : 'Reject';
+                personasHtml += `<div class="decision-row ${vClass}">
+                    ${icon} <strong>${name.replace('_',' ').toUpperCase()}</strong> → ${data.verdict.toUpperCase()}
+                    <br/><small>${data.reason}</small>
+                </div>`;
+            }
+        } else {
+            personasHtml = '<p style="color:var(--text-secondary)">AI persona verdicts unavailable (rate limit hit — deterministic fallback was used).</p>';
+        }
+
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div class="result-card">
+                <div class="result-header">
+                    <div>
+                        <h3>${product.title}</h3>
+                        <p style="color:var(--text-secondary)">${product.category} · $${product.price}</p>
+                    </div>
+                    <span class="badge ${priorityClass}">${result.priority}</span>
+                </div>
+                <div class="result-score">
+                    Impact Score: <strong>${result.impact_score}</strong> &nbsp;|&nbsp;
+                    ${result.displacement_risk}
+                </div>
+                <div class="result-split">
+                    <div>
+                        <h4>Issues Detected</h4>
+                        <ul class="key-issues-list">${issuesHtml}</ul>
+                    </div>
+                    <div>
+                        <h4>AI Persona Verdicts</h4>
+                        <div class="ai-decision-list">${personasHtml}</div>
+                    </div>
+                </div>
+                ${result.suggested_fix && result.suggested_fix.updated_text ? `
+                <div class="result-fix">
+                    <h4>AI-Suggested Improved Listing</h4>
+                    <div class="improved-listing-box"><p>${result.suggested_fix.updated_text}</p></div>
+                </div>` : ''}
+                <div class="result-actions">
+                    <button class="apply-btn" onclick="addToDashboard(${JSON.stringify(result).replace(/'/g, "&#39;")})">
+                        Add to Dashboard
+                    </button>
+                    <button class="secondary-btn" onclick="document.getElementById('analysisOverlay').classList.remove('active')">
+                        Close
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function addToDashboard(result) {
+        productData.push(result);
+        renderGrid(productData);
+        document.getElementById('analysisOverlay').classList.remove('active');
+        updateStats({ products: productData, store_summary: null });
+    }
+    
+    window.addToDashboard = addToDashboard;
 });

@@ -1,8 +1,8 @@
-# 🏗️ The ShopMind Architecture Deep Dive
+# The ShopMind Architecture Deep Dive
 
 ShopMind relies on a sophisticated **5-Layer Pipeline** to process data efficiently. We deliberately separated the abstract LLM logic from the strict software engineering checks.
 
-## 🗺️ High-Level Logic Diagram
+## High-Level Logic Diagram
 ```mermaid
 flowchart TD
     subgraph Layer 1: Ingestion State
@@ -32,7 +32,7 @@ flowchart TD
 
 ---
 
-## 🗂️ The Codebase Explained
+## The Codebase Explained
 
 ### Layer 1: Context is King
 `layer1_ingestion.py` marries 3 critical data points:

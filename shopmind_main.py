@@ -16,14 +16,14 @@ def run_shopmind_engine():
     # Authentication Check
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        print("❌ CRITICAL: Missing GEMINI_API_KEY environment variable!")
+        print("CRITICAL: Missing GEMINI_API_KEY environment variable!")
         print("Please run: export GEMINI_API_KEY='your_key'")
         return
         
-    print("🚀 Booting ShopMind Two-Layer Engine...")
+    print("Booting ShopMind Two-Layer Engine...")
     model = initialize_model(api_key)
     if not model:
-        print("❌ Failed to bind to Google Gemini API.")
+        print("Failed to bind to Google Gemini API.")
         return
         
     # LAYER 1
@@ -37,7 +37,7 @@ def run_shopmind_engine():
     final_dashboard_payload = []
     
     for idx, p in enumerate(products):
-        print(f"🔍 Analyzing [{p.get('id')}]: {p.get('title')}", end=" ", flush=True)
+        print(f"Analyzing [{p.get('id')}]: {p.get('title')}", end=" ", flush=True)
         
         # LAYER 2A: Qualitative LLM (Multi-Persona)
         llm_result = evaluate_with_llm(p, store_context, model)
@@ -52,6 +52,9 @@ def run_shopmind_engine():
         product_card = {
             "product_id": p.get('id'),
             "title": p.get('title'),
+            "description": p.get('description', ''),
+            "category": p.get('category', ''),
+            "price": p.get('price', 0),
             "priority": scorer_result.get("priority_rank"),
             "impact_score": scorer_result.get("calculated_impact_score"),
             "displacement_risk": scorer_result.get("displacement_risk"),
@@ -71,7 +74,7 @@ def run_shopmind_engine():
             
     # Save output securely
     store_summary = generate_store_summary(final_dashboard_payload, store_context)
-    print(f"\n📊 Store AI Readiness Score: {store_summary['store_ai_readiness_score']}% — {store_summary['verdict']}")
+    print(f"\nStore AI Readiness Score: {store_summary['store_ai_readiness_score']}% — {store_summary['verdict']}")
     
     final_output = {
         "store_summary": store_summary,
@@ -81,7 +84,7 @@ def run_shopmind_engine():
         json.dump(final_output, f, indent=2)
         
     print("\n" + "="*80)
-    print("🛒 ShopMind Matrix Complete! 🛒")
+    print("ShopMind Matrix Complete!")
     print("Dashboard raw JSON generated at: shopmind_results.json")
     print("="*80)
 

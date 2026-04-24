@@ -87,7 +87,7 @@ OUTPUT STRICTLY JSON ONLY (using exactly this structure):
         print(f"   [API Warning] {e}")
         # Safe fallback for UI dashboard to prevent crashes
         return {
-            "ai_rejection_probability": 1.0, 
+            "ai_rejection_probability": None, 
             "personas": {}, 
             "error": "LLM validation failed.",
             "suggested_fix": {"updated_text": ""}

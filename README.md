@@ -1,4 +1,4 @@
-# 🧠 ShopMind: AI Commerce Readiness & Competitive Displacement Platform
+# ShopMind: AI Commerce Readiness & Competitive Displacement Platform
 
 *Are AI shopping agents recommending your products, or are you losing sales to generic competitors?*
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 🏆 Key Innovations (Why This Breaks the Hackathon Mold)
+## Key Innovations (Why This Breaks the Hackathon Mold)
 
 ### 1. Dual-Layer AI Engine (Graceful Degradation)
 We don't just rely on an API.
@@ -31,7 +31,7 @@ It's not just about individual products. The engine aggregates total displacemen
 
 ---
 
-## 🚀 How to Run locally
+## How to Run locally
 
 ### 1. Backend Engine
 Ensure you have the Gemini API configured:
@@ -58,4 +58,4 @@ Browse to [http://localhost:8000](http://localhost:8000) to view the Premium Dar
 
 ---
 
-📂 **For a profound deep-dive into the codebase logic, view the [ARCHITECTURE.md](ARCHITECTURE.md)!**
+**For a profound deep-dive into the codebase logic, view the [ARCHITECTURE.md](ARCHITECTURE.md)!**

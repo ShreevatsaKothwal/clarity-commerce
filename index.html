@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="app-header">
-        <div class="logo">🧠 ShopMind</div>
+        <div class="logo">ShopMind</div>
         <div class="header-stats" id="headerStats">
             <!-- Dynamically populated -->
         </div>
@@ -39,6 +39,76 @@
     </main>
 
     <!-- Modal for Detailed Inspector View -->
+    <button class="add-product-fab" id="openFormBtn">
+        <span>+</span> Add Product
+    </button>
+
+    <div class="form-overlay" id="productFormOverlay">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Add New Product for AI Audit</h2>
+                <p>Fill in your product details. ShopMind will analyze how AI shopping agents perceive it.</p>
+                <button class="close-btn" id="closeFormBtn">×</button>
+            </div>
+            <div class="form-body">
+                <div class="form-group">
+                    <label>Product Title *</label>
+                    <input type="text" id="f_title" placeholder="e.g. Nomad 30L Travel Backpack" />
+                    <span class="form-hint">Be specific — vague titles like 'Shoes' will be flagged</span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price (USD) *</label>
+                        <input type="number" id="f_price" placeholder="e.g. 129.99" />
+                    </div>
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select id="f_category">
+                            <option value="">Select category...</option>
+                            <option value="Bags & Luggage">Bags & Luggage</option>
+                            <option value="Luggage">Luggage</option>
+                            <option value="Footwear">Footwear</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Fitness">Fitness</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Product Description</label>
+                    <textarea id="f_desc" rows="5" placeholder="Describe your product in detail — materials, dimensions, use-case, specs..."></textarea>
+                    <span class="form-hint">The more specific, the better your AI readiness score</span>
+                </div>
+                <div class="form-group">
+                    <label>Merchant Intent</label>
+                    <input type="text" id="f_intent" placeholder="e.g. Sell a premium travel bag to tech-savvy frequent flyers" />
+                    <span class="form-hint">What are you really trying to communicate to buyers?</span>
+                </div>
+                <div class="form-group">
+                    <label>Product Image URL (optional)</label>
+                    <input type="url" id="f_image" placeholder="https://..." />
+                </div>
+                <button class="submit-btn" id="submitProductBtn">
+                    Analyze This Product
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="analysis-overlay" id="analysisOverlay">
+        <div class="analysis-container">
+            <h2>ShopMind is Analyzing Your Product</h2>
+            <div class="analysis-steps" id="analysisSteps">
+                <!-- Steps injected by JS -->
+            </div>
+            <div class="analysis-result" id="analysisResult" style="display:none;">
+                <!-- Result injected by JS -->
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="inspectorModal">
         <div class="modal-content" id="modalContentContainer">
             <!-- Populated by app.js -->
