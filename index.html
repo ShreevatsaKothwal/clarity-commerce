@@ -22,8 +22,14 @@
         <!-- Store Summary Panel -->
         <div class="store-summary-panel" id="storeSummaryPanel" style="display: none;">
             <div class="summary-score">
-                <div class="score-circle">
-                    <span id="summaryScore">--</span><span style="font-size: 1rem;">%</span>
+                <div class="gauge-container">
+                    <svg viewBox="0 0 100 60" class="gauge-svg">
+                        <path class="gauge-bg" d="M 10 50 A 40 40 0 0 1 90 50" />
+                        <path class="gauge-fill" id="gaugeFill" d="M 10 50 A 40 40 0 0 1 90 50" />
+                    </svg>
+                    <div class="gauge-text">
+                        <span id="summaryScore">--</span><span style="font-size: 1.1rem;">%</span>
+                    </div>
                 </div>
                 <div class="score-label">AI Readiness</div>
             </div>
@@ -58,20 +64,24 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Price (USD) *</label>
-                        <input type="number" id="f_price" placeholder="e.g. 129.99" />
+                        <label>Price (INR) *</label>
+                        <input type="number" id="f_price" placeholder="e.g. 2999" />
                     </div>
                     <div class="form-group">
                         <label>Category *</label>
                         <select id="f_category">
                             <option value="">Select category...</option>
-                            <option value="Bags & Luggage">Bags & Luggage</option>
-                            <option value="Luggage">Luggage</option>
-                            <option value="Footwear">Footwear</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Accessories">Accessories</option>
-                            <option value="Fitness">Fitness</option>
-                            <option value="Clothing">Clothing</option>
+                            <option value="Mobiles, Computers">Mobiles, Computers</option>
+                            <option value="TV, Appliances, Electronics">TV, Appliances, Electronics</option>
+                            <option value="Men's Fashion">Men's Fashion</option>
+                            <option value="Women's Fashion">Women's Fashion</option>
+                            <option value="Home, Kitchen, Pets">Home, Kitchen, Pets</option>
+                            <option value="Beauty, Health, Grocery">Beauty, Health, Grocery</option>
+                            <option value="Sports, Fitness, Bags, Luggage">Sports, Fitness, Bags, Luggage</option>
+                            <option value="Toys, Baby Products, Kids' Fashion">Toys, Baby Products, Kids' Fashion</option>
+                            <option value="Car, Motorbike, Industrial">Car, Motorbike, Industrial</option>
+                            <option value="Books">Books</option>
+                            <option value="Movies, Music & Video Games">Movies, Music & Video Games</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -87,8 +97,8 @@
                     <span class="form-hint">What are you really trying to communicate to buyers?</span>
                 </div>
                 <div class="form-group">
-                    <label>Product Image URL (optional)</label>
-                    <input type="url" id="f_image" placeholder="https://..." />
+                    <label>Product Image (optional)</label>
+                    <input type="file" id="f_image" accept="image/*" />
                 </div>
                 <button class="submit-btn" id="submitProductBtn">
                     Analyze This Product

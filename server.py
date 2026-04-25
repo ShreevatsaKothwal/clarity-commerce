@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 class APIHandler(SimpleHTTPRequestHandler):
@@ -44,8 +45,8 @@ class APIHandler(SimpleHTTPRequestHandler):
             product = json.loads(post_data.decode('utf-8'))
 
             # Import and run the pipeline inline
-            import sys, os
-            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            # import sys, os
+            # sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
             from layer2_deterministic import analyze_deterministic_gaps
             from layer3_scorer import calculate_displacement
             from layer1_ingestion import ingest_storefront_data
@@ -59,7 +60,7 @@ class APIHandler(SimpleHTTPRequestHandler):
 
             # LLM layer — try, fallback gracefully
             llm_result = {"ai_rejection_probability": None, "personas": {}, "error": "LLM skipped in live mode", "suggested_fix": {"updated_text": ""}}
-            api_key = os.environ.get("GEMINI_API_KEY")
+            api_key = os.environ.get("GROQ_API_KEY")
             if api_key:
                 try:
                     from layer2_llm import evaluate_with_llm, initialize_model

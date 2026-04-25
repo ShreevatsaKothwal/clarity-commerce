@@ -14,10 +14,10 @@ from layer5_store_summary import generate_store_summary
 
 def run_shopmind_engine():
     # Authentication Check
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        print("CRITICAL: Missing GEMINI_API_KEY environment variable!")
-        print("Please run: export GEMINI_API_KEY='your_key'")
+        print("CRITICAL: Missing GROQ_API_KEY environment variable!")
+        print("Please run: export GROQ_API_KEY='your_key'")
         return
         
     print("Booting ShopMind Two-Layer Engine...")

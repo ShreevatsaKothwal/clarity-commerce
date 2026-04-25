@@ -1,99 +1,346 @@
 {
   "store_summary": {
-    "store_name": "Clarity Demo Store",
-    "store_ai_readiness_score": 65.5,
-    "total_products_audited": 5,
+    "store_name": "Clarity Commerce",
+    "store_ai_readiness_score": 21.0,
+    "total_products_audited": 10,
     "priority_breakdown": {
-      "CRITICAL": 2,
-      "HIGH": 3,
-      "MEDIUM": 0
+      "CRITICAL": 7,
+      "HIGH": 2,
+      "MEDIUM": 1
     },
-    "avg_impact_score": 0.77,
-    "store_level_warning": "Store FAQ coverage is 'none'. AI agents answering buyer questions will find gaps and lose trust.",
-    "verdict": "STORE NEEDS IMPROVEMENT"
+    "avg_impact_score": 0.79,
+    "store_level_warning": "Store FAQ coverage is 'Moderate'. AI agents answering buyer questions will find gaps and lose trust.",
+    "verdict": "STORE AT RISK"
   },
   "products": [
     {
       "product_id": "prod_1",
       "title": "Nomad 30L Travel Backpack",
-      "priority": "HIGH",
-      "impact_score": 0.6,
-      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Amazon Basics Travel Backpack' instead because of gaps.",
+      "description": "A durable, water-resistant 30L backpack perfect for weekend trips. Features a dedicated 15-inch laptop sleeve, padded shoulder straps, and a breathable mesh back panel. Dimensions: 20 x 13 x 8 inches. Weight: 2.5 lbs.",
+      "category": "Bags & Luggage",
+      "price": 129.99,
+      "priority": "MEDIUM",
+      "impact_score": 0.4,
+      "displacement_risk": "MODERATE: Vulnerable to highly-specific generic listings.",
       "competitor_advantage": "Crystal clear physical dimensions, massive review count, guaranteed 2-day delivery.",
       "llm_persona_verdicts": {
         "travel_planner": {
           "verdict": "buy",
-          "reason": "Dimensions (20x13x8 inches) and weight (2.5 lbs) are provided and suitable for most carry-on limits. 30L capacity and laptop sleeve are good for weekend trips."
+          "reason": "Product provides dimensions, weight, and laptop sleeve size"
         },
         "deal_finder": {
           "verdict": "reject",
-          "reason": "Lacks specific material quality (e.g., denier, fabric type) to justify the $129.99 price and assess true value or compare against competitors."
+          "reason": "Lacks explicit material quality and warranty details in product description"
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "No mention of color options, specific style, or aesthetic details, making it impossible to assess visual appeal or matching capabilities."
+          "reason": "No color options or brand information provided"
         }
       },
       "deterministic_issues": [],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "The Nomad 30L Travel Backpack is crafted from robust 600D water-resistant polyester with a DWR coating, ensuring durability and protection for your gear on weekend trips. Designed to meet most airline carry-on standards (20 x 13 x 8 inches, 2.5 lbs), it features a dedicated padded 15-inch laptop sleeve, a spacious main compartment, and multiple internal and external pockets for organized packing. Comfort is prioritized with padded, adjustable shoulder straps, a breathable mesh back panel, and an adjustable sternum strap. Available in sleek Black, Charcoal Grey, and Forest Green."
+        "updated_text": "A durable, water-resistant 30L backpack made from high-quality nylon, perfect for weekend trips. Features a dedicated 15-inch laptop sleeve, padded shoulder straps, and a breathable mesh back panel. Dimensions: 20 x 13 x 8 inches. Weight: 2.5 lbs. Available in black, blue, and grey. 1-year limited warranty on defects."
       }
     },
     {
       "product_id": "prod_2",
       "title": "Running Shoes",
-      "priority": "HIGH",
-      "impact_score": 0.7,
+      "description": "",
+      "category": "",
+      "price": 89.99,
+      "priority": "CRITICAL",
+      "impact_score": 0.85,
       "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Amazon Basics Travel Backpack' instead because of gaps.",
       "competitor_advantage": "Crystal clear physical dimensions, massive review count, guaranteed 2-day delivery.",
-      "llm_persona_verdicts": {},
-      "deterministic_issues": [],
+      "llm_persona_verdicts": {
+        "travel_planner": {
+          "verdict": "reject",
+          "reason": "lacks size and weight information"
+        },
+        "deal_finder": {
+          "verdict": "reject",
+          "reason": "no explicit material quality and unclear value"
+        },
+        "stylist": {
+          "verdict": "reject",
+          "reason": "no image and unclear aesthetics"
+        }
+      },
+      "deterministic_issues": [
+        "Critical Gap: Product has no description. An AI shopping agent will have zero data to evaluate this product.",
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Missing Metadata: No product category defined. AI shopping agents use category to route and rank products in search results.",
+        "Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it."
+      ],
       "suggested_fix": {
-        "updated_text": ""
+        "field": "description",
+        "updated_text": "Premium athletic running shoes designed for daily joggers and runners, featuring high-quality materials, available in various sizes (US 6-12, EU 36-47), weighing 10.5 oz, with a 1-year limited warranty and 30-day free returns."
       }
     },
     {
       "product_id": "prod_3",
       "title": "Men's Black Leather Wallet",
+      "description": "Stay stylish with this beautiful brown synthetic leather wallet. Features 6 card slots and a clear ID window. Designed for everyday use.",
+      "category": "Accessories",
+      "price": 45.0,
       "priority": "CRITICAL",
-      "impact_score": 0.92,
+      "impact_score": 0.87,
       "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Generic RFID Blocking Wallet' instead because of gaps.",
       "competitor_advantage": "Explicitly states material composition (100% genuine vs PU), clear dimensions provided.",
-      "llm_persona_verdicts": {},
+      "llm_persona_verdicts": {
+        "travel_planner": {
+          "verdict": "reject",
+          "reason": "missing size and weight information"
+        },
+        "deal_finder": {
+          "verdict": "reject",
+          "reason": "no explicit material quality and warranty details"
+        },
+        "stylist": {
+          "verdict": "reject",
+          "reason": "inconsistent color description and lack of image"
+        }
+      },
       "deterministic_issues": [
-        "Contradiction: Title mentions black, but description mentions a different color."
+        "Contradiction: Title mentions black, but description mentions a different color.",
+        "Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it."
       ],
       "suggested_fix": {
-        "updated_text": ""
+        "field": "description",
+        "updated_text": "Stay stylish with this beautiful brown synthetic leather wallet, measuring 4.5 inches in length and 3.5 inches in width, weighing 6 ounces. Features 6 card slots and a clear ID window. Made from high-quality synthetic leather, this wallet is designed for everyday use and comes with a 1-year limited warranty."
       }
     },
     {
       "product_id": "prod_4",
       "title": "Quantum XF-900",
-      "priority": "HIGH",
-      "impact_score": 0.7,
+      "description": "XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV. The sub-assembly integration allows for zero-latency phase shifting in the Q-band spectrum. Manufactured in facility 7B.",
+      "category": "Electronics",
+      "price": 899.0,
+      "priority": "CRITICAL",
+      "impact_score": 0.85,
       "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Industrial Standard Signal Phase Module' instead because of gaps.",
       "competitor_advantage": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed.",
-      "llm_persona_verdicts": {},
-      "deterministic_issues": [],
+      "llm_persona_verdicts": {
+        "procurement_agent": {
+          "verdict": "reject",
+          "reason": "Lack of exact specs and B2B pricing information"
+        },
+        "spec_engineer": {
+          "verdict": "reject",
+          "reason": "Insufficient technical details on materials and operating limits"
+        },
+        "price_analyst": {
+          "verdict": "buy",
+          "reason": "Presence of explicit warranty coverage and potential for bulk value"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Clarity Failure: Description is heavily jargon-laden. Consumer AI agents cannot match this to any real buyer use-case."
+      ],
       "suggested_fix": {
-        "updated_text": ""
+        "field": "description",
+        "updated_text": "The Quantum XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV, manufactured from high-quality ceramic materials, and operates within a temperature range of -20 to 80 degrees Celsius. It is designed for industrial tech manufacturers, with a 1-year limited warranty, and is available for bulk orders with competitive B2B pricing."
       }
     },
     {
       "product_id": "prod_5",
       "title": "Aero Lite Weekend Carry-on Suitcase",
-      "priority": "CRITICAL",
-      "impact_score": 0.93,
-      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Amazon Basics Travel Backpack' instead because of gaps.",
+      "description": "The perfect lightweight suitcase for your weekend getaways. Features omni-directional spinner wheels, a TSA-approved lock, and a sleek hard-shell exterior. Easily fits in the overhead bin of most major airlines.",
+      "category": "Luggage",
+      "price": 150.0,
+      "priority": "HIGH",
+      "impact_score": 0.73,
+      "displacement_risk": "MODERATE: Vulnerable to highly-specific generic listings.",
       "competitor_advantage": "Crystal clear physical dimensions, massive review count, guaranteed 2-day delivery.",
-      "llm_persona_verdicts": {},
+      "llm_persona_verdicts": {
+        "travel_planner": {
+          "verdict": "reject",
+          "reason": "missing size and weight details"
+        },
+        "deal_finder": {
+          "verdict": "buy",
+          "reason": "clear warranty and return policies"
+        },
+        "stylist": {
+          "verdict": "reject",
+          "reason": "lacking color and brand information"
+        }
+      },
       "deterministic_issues": [
         "Missing Spec: Luggage lacks precise hardware dimensions."
       ],
       "suggested_fix": {
-        "updated_text": ""
+        "field": "description",
+        "updated_text": "The Aero Lite Weekend Carry-on Suitcase is a regulation-compatible, lightweight hard-shell carry-on suitcase, measuring 22 inches (55.88 cm) in height, 14 inches (35.56 cm) in width, and 9 inches (22.86 cm) in depth, weighing 6.3 lbs (2.86 kg), featuring omni-directional spinner wheels, a TSA-approved lock, and a sleek hard-shell exterior in a range of colors, including black, navy, and red, perfect for frequent airline travelers."
+      }
+    },
+    {
+      "product_id": "prod_6",
+      "title": "Sony Noise Cancelling Headphones",
+      "description": "Good headphones.",
+      "category": "Electronics",
+      "price": 0.01,
+      "priority": "CRITICAL",
+      "impact_score": 0.89,
+      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Industrial Standard Signal Phase Module' instead because of gaps.",
+      "competitor_advantage": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed.",
+      "llm_persona_verdicts": {
+        "procurement_agent": {
+          "verdict": "reject",
+          "reason": "Lack of exact specs and B2B pricing"
+        },
+        "spec_engineer": {
+          "verdict": "reject",
+          "reason": "Insufficient technical details and operating limits"
+        },
+        "price_analyst": {
+          "verdict": "reject",
+          "reason": "Unclear bulk value, ROI, and warranty coverage"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Description is present but too short (< 50 chars) to provide meaningful AI context.",
+        "Trust Gap: Price is highly anomalous (too cheap or excessively expensive with little detail). AI agents will flag as risky."
+      ],
+      "suggested_fix": {
+        "field": "description",
+        "updated_text": "Sony Noise Cancelling Headphones: Over-ear, wireless design with advanced noise cancellation technology, compatible with various devices. Frequency response: 20Hz-20kHz, impedance: 47 ohms, battery life: up to 30 hours. 1-year limited warranty, 30-day free returns on unused items."
+      }
+    },
+    {
+      "product_id": "prod_7",
+      "title": "Shoes",
+      "description": "Comfortable shoes for walking.",
+      "category": "Footwear",
+      "price": 50.0,
+      "priority": "CRITICAL",
+      "impact_score": 0.83,
+      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Nike Revolution 6' instead because of gaps.",
+      "competitor_advantage": "Detailed sizing charts, specific materials (breathable mesh), and explicit intended use (daily running).",
+      "llm_persona_verdicts": {
+        "fitness_coach": {
+          "verdict": "reject",
+          "reason": "Lack of performance features and material details"
+        },
+        "casual_wearer": {
+          "verdict": "reject",
+          "reason": "No style, color, or comfort details provided"
+        },
+        "podiatrist_ai": {
+          "verdict": "reject",
+          "reason": "Insufficient information on arch support and orthopedic benefits"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Weak Signal: Description is present but too short (< 50 chars) to provide meaningful AI context.",
+        "Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it.",
+        "Clarity Failure: Title is purely a generic category word. AI agents cannot distinguish this from millions of others."
+      ],
+      "suggested_fix": {
+        "field": "description",
+        "updated_text": "Our comfortable walking shoes for elderly customers feature breathable mesh uppers, supportive arches, and a cushioned sole for superior comfort. With a range of width options and orthopedic benefits, these shoes are perfect for daily wear. Available in multiple colors to match your style."
+      }
+    },
+    {
+      "product_id": "prod_8",
+      "title": "Smart Watch",
+      "description": "Track your fitness with this amazing smart watch. Syncs with your phone.",
+      "category": "Electronics",
+      "price": 199.99,
+      "priority": "CRITICAL",
+      "impact_score": 0.87,
+      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Industrial Standard Signal Phase Module' instead because of gaps.",
+      "competitor_advantage": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed.",
+      "llm_persona_verdicts": {
+        "procurement_agent": {
+          "verdict": "reject",
+          "reason": "Lack of exact specs and B2B pricing"
+        },
+        "spec_engineer": {
+          "verdict": "reject",
+          "reason": "Insufficient technical details and operating limits"
+        },
+        "price_analyst": {
+          "verdict": "reject",
+          "reason": "No bulk pricing, unclear ROI, and limited warranty information"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it."
+      ],
+      "suggested_fix": {
+        "field": "description",
+        "updated_text": "Track your fitness with this amazing smart watch, compatible with iOS and Android. Features include heart rate monitoring, GPS tracking, and water resistance up to 50 meters. Syncs with your phone via Bluetooth 5.0. 1-year limited warranty and 30-day free returns on unused items."
+      }
+    },
+    {
+      "product_id": "prod_9",
+      "title": "Yoga Mat",
+      "description": "Non-slip yoga mat. 5mm thickness.",
+      "category": "Fitness",
+      "price": 25.0,
+      "priority": "HIGH",
+      "impact_score": 0.74,
+      "displacement_risk": "MODERATE: Vulnerable to highly-specific generic listings.",
+      "competitor_advantage": "Explicit dimensions, precise material density specifications, and lifetime warranty details.",
+      "llm_persona_verdicts": {
+        "travel_planner": {
+          "verdict": "reject",
+          "reason": "missing size and weight information"
+        },
+        "deal_finder": {
+          "verdict": "buy",
+          "reason": "clear price and warranty policy"
+        },
+        "stylist": {
+          "verdict": "reject",
+          "reason": "lacking aesthetics and color information"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Weak Signal: Description is present but too short (< 50 chars) to provide meaningful AI context."
+      ],
+      "suggested_fix": {
+        "field": "description",
+        "updated_text": "Non-slip yoga mat, 72 inches long, 24 inches wide, 5mm thick, weighing 2.5 pounds, available in 5 colors, perfect for home workouts."
+      }
+    },
+    {
+      "product_id": "prod_10",
+      "title": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse with USB receiver. Requires 1 AA battery.",
+      "category": "Electronics",
+      "price": 15.99,
+      "priority": "CRITICAL",
+      "impact_score": 0.82,
+      "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Industrial Standard Signal Phase Module' instead because of gaps.",
+      "competitor_advantage": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed.",
+      "llm_persona_verdicts": {
+        "procurement_agent": {
+          "verdict": "reject",
+          "reason": "Lack of exact specs and B2B pricing information"
+        },
+        "spec_engineer": {
+          "verdict": "reject",
+          "reason": "Insufficient technical details on materials and operating limits"
+        },
+        "price_analyst": {
+          "verdict": "reject",
+          "reason": "No bulk pricing or explicit warranty coverage details"
+        }
+      },
+      "deterministic_issues": [
+        "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.",
+        "Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it."
+      ],
+      "suggested_fix": {
+        "field": "description",
+        "updated_text": "Ergonomic wireless mouse with USB receiver, compatible with Windows, Mac, and Linux. Requires 1 AA battery, with a battery life of up to 12 months. Durable design with a lifespan of 5 million clicks. 1-year limited warranty on electronics. Bulk orders welcome, with discounts available for orders over 10 units."
       }
     }
   ]

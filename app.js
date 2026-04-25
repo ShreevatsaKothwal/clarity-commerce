@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('inspectorModal');
     const closeBtn = document.getElementById('closeModal');
     let productData = [];
+    let lastKnownSummary = null;
 
     // Fetch JSON safely
     fetch('shopmind_results.json')
@@ -30,64 +31,93 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderGrid(data) {
         grid.innerHTML = '';
         data.forEach((p, index) => {
-            const priorityClass = p.priority ? p.priority.toLowerCase() : 'medium';
+            const priorityClass = p.isFixed ? 'fixed' : (p.priority ? p.priority.toLowerCase() : 'medium');
+            const priorityText = p.isFixed ? 'FIXED' : p.priority;
             const riskText = p.displacement_risk || "Risk profile unavailable";
             
+            let descHtml = '';
+            let footerHtml = '';
+            
+            if (p.isFixed) {
+                const newText = p.appliedFixText || 'Optimized description';
+                descHtml = `<strong>Optimized Description:</strong><br/>${newText.slice(0, 95).replace(/\n/g, ' ')}...`;
+                footerHtml = `<span>AI-Optimized &middot; Synced to Store</span>`;
+            } else {
+                descHtml = `<strong>Displacement Risk:</strong><br/>${riskText.slice(0, 95)}...`;
+                footerHtml = `<span>Impact Score: ${p.impact_score}</span>`;
+            }
+            
+            const cardClass = p.isFixed ? 'product-card fixed-card' : 'product-card';
+            
             const card = document.createElement('div');
-            card.className = 'product-card';
+            card.className = cardClass;
             card.innerHTML = `
                 <div class="card-header">
                     <div class="card-title">${p.title}</div>
-                    <div class="badge ${priorityClass}">${p.priority}</div>
+                    <div class="badge ${priorityClass}">${priorityText}</div>
                 </div>
                 <div class="card-risk">
-                    <strong>Displacement Risk:</strong><br/>
-                    ${riskText.slice(0, 95)}...
+                    ${descHtml}
                 </div>
                 <div class="card-footer">
-                    <span>Impact Score: ${p.impact_score}</span>
+                    ${footerHtml}
                     <span style="color:var(--color-primary); font-weight: 500;">Inspect</span>
                 </div>
             `;
             
-            card.addEventListener('click', () => openModal(p));
+            card.addEventListener('click', () => {
+                openModal(p);
+            });
             grid.appendChild(card);
         });
     }
 
     function updateStats(data) {
+        if (data.store_summary) {
+            lastKnownSummary = data.store_summary;
+        }
+
         const statsObj = document.getElementById('headerStats');
         const count = data.products ? data.products.length : 0;
         const criticalCount = data.products ? data.products.filter(p => p.priority === "CRITICAL").length : 0;
-        const score = data.store_summary ? data.store_summary.store_ai_readiness_score : "N/A";
-        const verdict = data.store_summary ? data.store_summary.verdict : "N/A";
+        const score = lastKnownSummary ? lastKnownSummary.store_ai_readiness_score : "N/A";
+        const verdict = lastKnownSummary ? lastKnownSummary.verdict : "N/A";
         statsObj.innerText = `Total Audited: ${count} | Critical Issues: ${criticalCount} | Store AI Readiness: ${score}% (${verdict})`;
         
         // Populate new Store Summary Panel
-        if (data.store_summary) {
+        if (lastKnownSummary) {
             const panel = document.getElementById('storeSummaryPanel');
             if (panel) {
                 panel.style.display = 'flex';
-                document.getElementById('summaryScore').innerText = data.store_summary.store_ai_readiness_score;
-                document.getElementById('summaryVerdict').innerText = data.store_summary.verdict;
+                document.getElementById('summaryScore').innerText = lastKnownSummary.store_ai_readiness_score;
+                document.getElementById('summaryVerdict').innerText = lastKnownSummary.verdict;
                 
                 const warningEl = document.getElementById('summaryWarning');
-                if (data.store_summary.store_level_warning) {
-                    warningEl.innerText = `${data.store_summary.store_level_warning}`;
+                if (lastKnownSummary.store_level_warning) {
+                    warningEl.innerText = `${lastKnownSummary.store_level_warning}`;
                 } else {
                     warningEl.innerText = "";
                 }
                 
-                // Color circle based on score
-                const circle = document.querySelector('.score-circle');
-                if (data.store_summary.store_ai_readiness_score < 50) {
-                    circle.style.borderColor = "var(--color-danger)";
+                // Update gauge
+                const gaugeFill = document.getElementById('gaugeFill');
+                const scoreValue = parseFloat(lastKnownSummary.store_ai_readiness_score) || 0;
+                const offset = 125.66 - (125.66 * scoreValue / 100);
+                
+                setTimeout(() => {
+                    if (gaugeFill) {
+                        gaugeFill.style.strokeDashoffset = offset;
+                    }
+                }, 50);
+
+                if (scoreValue < 50) {
+                    if (gaugeFill) gaugeFill.style.stroke = "var(--color-danger)";
                     document.getElementById('summaryVerdict').style.color = "var(--color-danger)";
-                } else if (data.store_summary.store_ai_readiness_score < 75) {
-                    circle.style.borderColor = "var(--color-warning)";
+                } else if (scoreValue < 75) {
+                    if (gaugeFill) gaugeFill.style.stroke = "var(--color-warning)";
                     document.getElementById('summaryVerdict').style.color = "var(--color-warning)";
                 } else {
-                    circle.style.borderColor = "var(--color-success)";
+                    if (gaugeFill) gaugeFill.style.stroke = "var(--color-success)";
                     document.getElementById('summaryVerdict').style.color = "var(--color-success)";
                     warningEl.style.color = "var(--text-secondary)";
                 }
@@ -96,10 +126,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openModal(p) {
-        const priorityClass = p.priority ? p.priority.toLowerCase() : 'medium';
-        const priceText = p.price ? `$${p.price.toFixed(2)}` : '$$$'; 
-        const categoryText = p.category ? p.category : 'E-Commerce Product';
         const modalContainer = document.getElementById('modalContentContainer');
+        
+        if (p.isFixed === true) {
+            modalContainer.innerHTML = `
+                <button class="close-btn" id="closeModal">×</button>
+                <div style="background: #dcfce7; padding: 1rem; border-radius: 8px; border: 1px solid #bbf7d0; color: #166534; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span>✅</span> This listing has been optimized and synced to store.
+                </div>
+                <h2 style="margin-bottom: 1.5rem;">Optimization Applied</h2>
+                <div class="split-view-container" style="display: grid; grid-template-columns: 1fr 40px 1fr; gap: 1rem; align-items: stretch;">
+                    <div class="split-col split-left" style="background: #fff5f5; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem;">Original Listing</h3>
+                        <div style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); flex-grow: 1;">
+                            <div style="margin-bottom:0.5rem;"><strong>Title:</strong> ${p.title}</div>
+                            <div><strong>Description:</strong><br/>${(p.originalDescription || p.description || 'Not provided').replace(/\n/g, '<br/>')}</div>
+                        </div>
+                    </div>
+                    <div class="split-arrow" style="display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #9ca3af;">→</div>
+                    <div class="split-col split-right" style="background: #f0fdf4; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem;">AI-Optimized Listing</h3>
+                        <div style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); flex-grow: 1;">
+                            <div style="margin-bottom:0.5rem;"><strong>Title:</strong> ${p.title}</div>
+                            <div><strong>Description:</strong><br/>
+                                <div style="background: #dcfce7; padding: 1rem; border-radius: 8px; border: 1px solid #bbf7d0; margin-top: 0.5rem;">
+                                    ${(p.appliedFixText || '').replace(/\n/g, '<br/>')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-actions" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+                    <button class="secondary-btn" id="reviewCloseBtn" style="width: 150px; flex: none;">Close</button>
+                </div>
+            `;
+            document.getElementById('closeModal').addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            document.getElementById('reviewCloseBtn').addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            modal.classList.add('active');
+            return;
+        }
+
+        const priorityClass = p.priority ? p.priority.toLowerCase() : 'medium';
+        const priceText = p.price ? `₹${p.price.toFixed(2)}` : '₹₹₹'; 
+        const categoryText = p.category ? p.category : 'E-Commerce Product';
+
 
         let personasHtml = '';
         if (p.llm_persona_verdicts && Object.keys(p.llm_persona_verdicts).length > 0) {
@@ -224,6 +298,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyBtn.innerText = "Listing Applied";
                 applyBtn.style.background = "var(--color-success)";
                 
+                p.originalDescription = p.description;
+                p.appliedFixText = p.suggested_fix.updated_text;
+                p.isFixed = true;
+                
                 // Visual update to the card in grid
                 const cards = document.querySelectorAll('.product-card');
                 cards.forEach(card => {
@@ -232,7 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const badge = card.querySelector('.badge');
                         badge.className = "badge fixed";
                         badge.innerText = "FIXED";
-                        card.querySelector('.card-risk').innerHTML = "<strong>Status:</strong><br/>Optimized for AI Agents. Ready for sync.";
+                        card.querySelector('.card-risk').innerHTML = `<strong>Optimized Description:</strong><br/>${p.appliedFixText.slice(0, 95).replace(/\n/g, ' ')}...`;
+                        card.querySelector('.card-footer').innerHTML = `<span>AI-Optimized &middot; Synced to Store</span><span style="color:var(--color-primary); font-weight: 500;">Inspect</span>`;
                         card.classList.add('fixed-animation');
                     }
                 });
@@ -250,6 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.classList.add('active');
     }
+
+
 
     // Modal Events
     if (closeBtn) {
@@ -330,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById(steps[i].id);
             el.classList.remove('pending');
             el.classList.add('done');
-            el.querySelector('.step-status').innerText = 'Done';
+            el.querySelector('.step-status').innerHTML = '<span style="color: #16a34a; font-weight: bold; font-size: 1rem;">✓</span>';
         }
 
         // Now call the real backend
@@ -362,10 +443,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let personasHtml = '';
+        let rejectCount = 0;
+        let rejectingPersona = '';
         if (result.llm_persona_verdicts && Object.keys(result.llm_persona_verdicts).length > 0) {
             for (let [name, data] of Object.entries(result.llm_persona_verdicts)) {
                 const vClass = data.verdict === 'buy' ? 'buy' : 'reject';
                 const icon = vClass === 'buy' ? 'Buy' : 'Reject';
+                if (vClass === 'reject') {
+                    rejectCount++;
+                    if (!rejectingPersona) rejectingPersona = name.replace('_', ' ');
+                }
                 personasHtml += `<div class="decision-row ${vClass}">
                     ${icon} <strong>${name.replace('_',' ').toUpperCase()}</strong> → ${data.verdict.toUpperCase()}
                     <br/><small>${data.reason}</small>
@@ -375,45 +462,177 @@ document.addEventListener('DOMContentLoaded', () => {
             personasHtml = '<p style="color:var(--text-secondary)">AI persona verdicts unavailable (rate limit hit — deterministic fallback was used).</p>';
         }
 
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div class="result-card">
-                <div class="result-header">
-                    <div>
-                        <h3>${product.title}</h3>
-                        <p style="color:var(--text-secondary)">${product.category} · $${product.price}</p>
+        let aiUnderstoodText = "AI correctly understood this product";
+        if (rejectCount >= 2) {
+            aiUnderstoodText = "AI classified this product as ambiguous and deprioritized it in search results";
+        } else if (rejectCount === 1) {
+            aiUnderstoodText = `AI partially understood this product but flagged gaps in ${rejectingPersona}'s area`;
+        }
+
+        const impactVal = parseFloat(result.impact_score) || 0;
+        let impactColorClass = "green";
+        if (impactVal > 0.75) impactColorClass = "red";
+        else if (impactVal >= 0.5) impactColorClass = "amber";
+
+        const intentGapHtml = `
+            <div class="intent-gap-screen">
+                <div class="intent-gap-title">Intent Gap Detected</div>
+                <div class="intent-boxes">
+                    <div class="intent-box">
+                        <h4>What You Intended</h4>
+                        <p>${product.merchant_intent || "Not specified"}</p>
                     </div>
-                    <span class="badge ${priorityClass}">${result.priority}</span>
-                </div>
-                <div class="result-score">
-                    Impact Score: <strong>${result.impact_score}</strong> &nbsp;|&nbsp;
-                    ${result.displacement_risk}
-                </div>
-                <div class="result-split">
-                    <div>
-                        <h4>Issues Detected</h4>
-                        <ul class="key-issues-list">${issuesHtml}</ul>
-                    </div>
-                    <div>
-                        <h4>AI Persona Verdicts</h4>
-                        <div class="ai-decision-list">${personasHtml}</div>
+                    <div class="intent-box">
+                        <h4>What AI Actually Understood</h4>
+                        <p>${aiUnderstoodText}</p>
                     </div>
                 </div>
-                ${result.suggested_fix && result.suggested_fix.updated_text ? `
-                <div class="result-fix">
-                    <h4>AI-Suggested Improved Listing</h4>
-                    <div class="improved-listing-box"><p>${result.suggested_fix.updated_text}</p></div>
-                </div>` : ''}
-                <div class="result-actions">
-                    <button class="apply-btn" onclick="addToDashboard(${JSON.stringify(result).replace(/'/g, "&#39;")})">
-                        Add to Dashboard
-                    </button>
-                    <button class="secondary-btn" onclick="document.getElementById('analysisOverlay').classList.remove('active')">
-                        Close
-                    </button>
+                <div class="impact-score-display">
+                    <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Displacement Impact Score</div>
+                    <div class="impact-score-value ${impactColorClass}">${result.impact_score}</div>
                 </div>
+                <button class="apply-btn" id="seeFullAnalysisBtn" style="margin-top: 1rem; width: auto; padding: 0.75rem 2rem;">See Full Analysis →</button>
             </div>
         `;
+
+        const rejectionRisk = Math.round(impactVal * 100);
+        
+        let hasValidFix = result.suggested_fix && result.suggested_fix.updated_text && result.suggested_fix.updated_text.trim() !== '';
+        let fixContentHtml = '';
+        let fixBoxClass = 'highlight-green';
+        let fixLabelHtml = '';
+
+        if (hasValidFix) {
+            fixContentHtml = result.suggested_fix.updated_text.replace(/\n/g, '<br/>');
+        } else {
+            fixBoxClass = 'highlight-amber';
+            let numberedIssues = '';
+            if (result.deterministic_issues && result.deterministic_issues.length > 0) {
+                result.deterministic_issues.forEach((issue, index) => {
+                    numberedIssues += `${index + 1}. ${issue}<br/>`;
+                });
+            } else {
+                numberedIssues = '1. General content gaps detected.<br/>';
+            }
+            
+            fixLabelHtml = `<div style="font-size: 0.85rem; color: #b45309; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.25rem;">⚠️ AI rewrite unavailable (API limit) — improvement guide generated instead</div>`;
+            
+            fixContentHtml = `Based on our analysis, here is what needs to be improved in this listing:<br/>
+${numberedIssues}<br/>
+To fix this product for AI readiness:<br/>
+- Add precise dimensions and measurements<br/>
+- Resolve any title-description contradictions<br/>
+- Add material specifications<br/>
+- Ensure the title contains at least 4 descriptive words`;
+        }
+        
+        const splitViewHtml = `
+            <div class="split-view-container">
+                <div class="split-col split-left">
+                    <h3>Current Listing — What Merchant Submitted</h3>
+                    <div class="split-card">
+                        <div style="margin-bottom:0.5rem;"><strong>Title:</strong> ${product.title}</div>
+                        <div style="margin-bottom:0.5rem;"><strong>Description:</strong><br/>${product.description || 'Not provided'}</div>
+                        <div><strong>Intent:</strong><br/>${product.merchant_intent || 'Not provided'}</div>
+                    </div>
+                    <div class="split-warning-box">
+                        <h4>How AI Currently Sees This Product</h4>
+                        <p style="margin-bottom: 0.5rem;">${result.displacement_risk || 'Unknown risk'}</p>
+                        <p style="margin-bottom: 0.5rem; font-weight: bold;">AI Rejection Risk: ${rejectionRisk}%</p>
+                        <div style="margin-top: 0.5rem;">
+                            <strong>Issues Detected:</strong>
+                            <ul class="key-issues-list" style="margin-top: 0.25rem;">${issuesHtml}</ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-arrow">→</div>
+
+                <div class="split-col split-right">
+                    <h3>AI-Optimized Listing — What ShopMind Recommends</h3>
+                    <div class="split-card">
+                        <div style="margin-bottom:0.5rem;"><strong>Title:</strong> ${product.title}</div>
+                        <div><strong>Description:</strong></div>
+                        ${fixLabelHtml}
+                        <div class="improved-listing-box ${fixBoxClass}" style="margin-top:0.5rem;">
+                            ${fixContentHtml}
+                        </div>
+                    </div>
+                    <div class="split-success-box">
+                        <h4>How AI Will See This After Fix</h4>
+                        <div class="displacement-low">Displacement Risk: LOW after applying this fix</div>
+                        <div class="ai-decision-list split-list">${personasHtml}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-actions" style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                <button class="apply-btn" id="splitApplyBtn" style="margin-top:0;">Apply Fix & Add to Dashboard</button>
+                <button class="secondary-btn" id="splitDiscardBtn" style="margin-top:0;">Discard & Close</button>
+            </div>
+        `;
+
+        container.style.display = 'block';
+        container.innerHTML = intentGapHtml;
+
+        let transitioned = false;
+        const transitionToSplit = () => {
+            if (transitioned) return;
+            transitioned = true;
+            container.innerHTML = splitViewHtml;
+            
+            document.getElementById('splitDiscardBtn').addEventListener('click', () => {
+                document.getElementById('analysisOverlay').classList.remove('active');
+            });
+
+            document.getElementById('splitApplyBtn').addEventListener('click', () => {
+                const applyBtn = document.getElementById('splitApplyBtn');
+                applyBtn.innerText = "Applying...";
+                applyBtn.disabled = true;
+
+                let textToSave = '';
+                if (hasValidFix) {
+                    textToSave = result.suggested_fix.updated_text;
+                } else {
+                    let numberedIssuesText = '';
+                    if (result.deterministic_issues && result.deterministic_issues.length > 0) {
+                        result.deterministic_issues.forEach((issue, index) => {
+                            numberedIssuesText += `${index + 1}. ${issue}\n`;
+                        });
+                    } else {
+                        numberedIssuesText = '1. General content gaps detected.\n';
+                    }
+                    textToSave = `Based on our analysis, here is what needs to be improved in this listing:\n${numberedIssuesText}\nTo fix this product for AI readiness:\n- Add precise dimensions and measurements\n- Resolve any title-description contradictions\n- Add material specifications\n- Ensure the title contains at least 4 descriptive words`;
+                }
+
+                fetch('/api/apply_fix', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ product_id: result.product_id, updated_text: textToSave })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    result.isFixed = true;
+                    result.originalDescription = product.description;
+                    result.appliedFixText = textToSave;
+                    addToDashboard(result);
+                    document.getElementById('analysisOverlay').classList.remove('active');
+                })
+                .catch(err => {
+                    console.error(err);
+                    applyBtn.innerText = "Error - See Console";
+                    applyBtn.disabled = false;
+                });
+            });
+        };
+
+        const seeFullBtn = document.getElementById('seeFullAnalysisBtn');
+        if (seeFullBtn) {
+            seeFullBtn.addEventListener('click', transitionToSplit);
+        }
+
+        setTimeout(() => {
+            transitionToSplit();
+        }, 2000);
     }
 
     function addToDashboard(result) {

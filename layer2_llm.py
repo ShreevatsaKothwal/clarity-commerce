@@ -1,17 +1,14 @@
-import google.generativeai as genai
+from groq import Groq
 import json
 
 def initialize_model(api_key):
-    """Initializes the Gemini model dynamically."""
-    genai.configure(api_key=api_key)
+    """Initializes the Groq client."""
     try:
-        available_models = [m.name for m in genai.list_models() if "generateContent" in m.supported_generation_methods]
-        target_model = "models/gemini-2.5-flash"
-        if target_model not in available_models:
-             target_model = "models/gemini-1.5-flash"
-        return genai.GenerativeModel(target_model)
+        client = Groq(api_key=api_key)
+        print(f"[✓] Groq client initialized successfully")
+        return client
     except Exception as e:
-        print(f"Model Init Error: {e}")
+        print(f"Groq Init Error: {e}")
         return None
 
 def evaluate_with_llm(product, context, model):
@@ -75,20 +72,33 @@ OUTPUT STRICTLY JSON ONLY (using exactly this structure):
 }}
 """
     try:
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.1
-            )
+        response = model.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are ShopMind, an AI commerce readiness engine. You always respond with valid JSON only. No markdown, no explanation, no extra text."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1,
+            max_tokens=1024,
         )
-        return json.loads(response.text)
+        raw_text = response.choices[0].message.content.strip()
+        # Strip markdown code blocks if present
+        if raw_text.startswith("```"):
+            raw_text = raw_text.split("```")[1]
+            if raw_text.startswith("json"):
+                raw_text = raw_text[4:]
+        return json.loads(raw_text)
     except Exception as e:
-        print(f"   [API Warning] {e}")
-        # Safe fallback for UI dashboard to prevent crashes
+        print(f"   [Groq API Warning] {e}")
         return {
-            "ai_rejection_probability": None, 
-            "personas": {}, 
+            "ai_rejection_probability": None,
+            "personas": {},
             "error": "LLM validation failed.",
             "suggested_fix": {"updated_text": ""}
         }
