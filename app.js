@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(data.verdict) {
                     const cleanName = personaName.replace('_', ' ').toUpperCase();
                     const vClass = data.verdict.toLowerCase() === 'buy' ? 'buy' : 'reject';
-                    const icon = vClass === 'buy' ? 'Buy' : 'Reject';
+                    const icon = vClass === 'buy' ? '✔' : '❌';
                     personasHtml += `<div class="decision-row ${vClass}">
                         <span class="decision-icon">${icon}</span> 
                         <span class="decision-name">${cleanName}</span> 
@@ -217,7 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- LEFT COLUMN -->
                 <div class="product-info-col">
                     <div class="product-image-placeholder">
-                        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        <div style="background: #e5e7eb; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 2rem; font-weight: bold; color: #6b7280; margin-bottom: 0.5rem;">
+                            ${p.title ? p.title.charAt(0).toUpperCase() : ''}
+                        </div>
                         <span>No Image Available</span>
                     </div>
                     <div class="product-meta">
@@ -284,6 +286,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("No valid fix available to apply.");
                 return;
             }
+
+            if (p.suggested_fix.updated_text.startsWith("Based on our analysis")) {
+                alert("This product has too little information for ShopMind to generate an optimized listing. Please add a description and merchant intent before applying a fix.");
+                return;
+            }
             
             applyBtn.innerText = "Applying...";
             applyBtn.disabled = true;
@@ -298,9 +305,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyBtn.innerText = "Listing Applied";
                 applyBtn.style.background = "var(--color-success)";
                 
-                p.originalDescription = p.description;
-                p.appliedFixText = p.suggested_fix.updated_text;
-                p.isFixed = true;
+                const targetProd = productData.find(item => item.product_id === p.product_id);
+                if (targetProd) {
+                    targetProd.isFixed = true;
+                    targetProd.originalDescription = p.description;
+                    targetProd.appliedFixText = p.suggested_fix.updated_text;
+                } else {
+                    p.originalDescription = p.description;
+                    p.appliedFixText = p.suggested_fix.updated_text;
+                    p.isFixed = true;
+                }
+
+                if (lastKnownSummary) {
+                    let currentScore = parseFloat(lastKnownSummary.store_ai_readiness_score) || 0;
+                    let recovery = (parseFloat(p.impact_score) || 0) * 8;
+                    let newScore = Math.min(100, currentScore + recovery);
+                    lastKnownSummary.store_ai_readiness_score = Math.round(newScore);
+                    updateStats({ products: productData, store_summary: lastKnownSummary });
+                }
                 
                 // Visual update to the card in grid
                 const cards = document.querySelectorAll('.product-card');
@@ -448,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (result.llm_persona_verdicts && Object.keys(result.llm_persona_verdicts).length > 0) {
             for (let [name, data] of Object.entries(result.llm_persona_verdicts)) {
                 const vClass = data.verdict === 'buy' ? 'buy' : 'reject';
-                const icon = vClass === 'buy' ? 'Buy' : 'Reject';
+                const icon = vClass === 'buy' ? '✔' : '❌';
                 if (vClass === 'reject') {
                     rejectCount++;
                     if (!rejectingPersona) rejectingPersona = name.replace('_', ' ');
@@ -585,10 +607,6 @@ To fix this product for AI readiness:<br/>
             });
 
             document.getElementById('splitApplyBtn').addEventListener('click', () => {
-                const applyBtn = document.getElementById('splitApplyBtn');
-                applyBtn.innerText = "Applying...";
-                applyBtn.disabled = true;
-
                 let textToSave = '';
                 if (hasValidFix) {
                     textToSave = result.suggested_fix.updated_text;
@@ -603,6 +621,15 @@ To fix this product for AI readiness:<br/>
                     }
                     textToSave = `Based on our analysis, here is what needs to be improved in this listing:\n${numberedIssuesText}\nTo fix this product for AI readiness:\n- Add precise dimensions and measurements\n- Resolve any title-description contradictions\n- Add material specifications\n- Ensure the title contains at least 4 descriptive words`;
                 }
+
+                if (textToSave.startsWith("Based on our analysis")) {
+                    alert("This product has too little information for ShopMind to generate an optimized listing. Please add a description and merchant intent before applying a fix.");
+                    return;
+                }
+
+                const applyBtn = document.getElementById('splitApplyBtn');
+                applyBtn.innerText = "Applying...";
+                applyBtn.disabled = true;
 
                 fetch('/api/apply_fix', {
                     method: 'POST',

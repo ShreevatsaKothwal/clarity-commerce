@@ -1,14 +1,14 @@
-\"\"\"
+"""
 ShopMind Decision Log Generator.
 Reads the shopmind_results.json file and dynamically injects the store's latest AI Readiness stats into the project's DECISION_LOG.md.
-\"\"\"
+"""
 import json
 
 def generate_log():
-    \"\"\"
+    """
     Reads shopmind_results.json, extracts store_summary and product metrics,
     and writes them into DECISION_LOG.md along with the hardcoded architecture decisions.
-    \"\"\"
+    """
     with open('shopmind_results.json', 'r') as f:
         data = json.load(f)
     

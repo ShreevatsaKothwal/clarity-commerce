@@ -1,38 +1,62 @@
 [
   {
     "category": "Bags & Luggage",
-    "competitor_name": "Amazon Basics Travel Backpack",
-    "ai_preference_score": 0.85,
-    "strengths": "Crystal clear physical dimensions, massive review count, guaranteed 2-day delivery."
+    "competitor_name": "Amazon Basics Laptop Backpack",
+    "ai_preference_score": 0.88,
+    "strengths": "Explicit dimensional specifications, clear material listing, thousands of verified reviews"
   },
   {
-    "category": "Accessories",
-    "competitor_name": "Generic RFID Blocking Wallet",
-    "ai_preference_score": 0.90,
-    "strengths": "Explicitly states material composition (100% genuine vs PU), clear dimensions provided."
-  },
-  {
-    "category": "Electronics",
-    "competitor_name": "Industrial Standard Signal Phase Module",
-    "ai_preference_score": 0.75,
-    "strengths": "Clear operating temperature ranges, voltage limits, and B2B bulk pricing listed."
-  },
-  {
-    "category": "Luggage",
-    "competitor_name": "TravelPro Maxlite 5",
-    "ai_preference_score": 0.95,
-    "strengths": "Verifiable dimensions specifically matching standard US domestic airline regulations down to the inch."
+    "category": "Men's Fashion",
+    "competitor_name": "H&M Classic Formal Shirt",
+    "ai_preference_score": 0.82,
+    "strengths": "Detailed fabric composition, comprehensive size guide, high-quality lifestyle imagery"
   },
   {
     "category": "Footwear",
-    "competitor_name": "Nike Revolution 6",
-    "ai_preference_score": 0.88,
-    "strengths": "Detailed sizing charts, specific materials (breathable mesh), and explicit intended use (daily running)."
+    "competitor_name": "Nike Revolution 7",
+    "ai_preference_score": 0.94,
+    "strengths": "Precise weight and drop specifications, clear usage context for runners, extensive user ratings"
+  },
+  {
+    "category": "Beauty, Health, Grocery",
+    "competitor_name": "Neutrogena Hydro Boost",
+    "ai_preference_score": 0.91,
+    "strengths": "Clear active ingredient listing, specific skin type recommendations, clinically proven claims"
+  },
+  {
+    "category": "Home, Kitchen, Pets",
+    "competitor_name": "Milton Steel Water Bottle",
+    "ai_preference_score": 0.85,
+    "strengths": "Exact temperature retention hours, food-grade material certification, capacity explicitly stated in ml"
+  },
+  {
+    "category": "Electronics",
+    "competitor_name": "Sony WH-1000XM5",
+    "ai_preference_score": 0.95,
+    "strengths": "Comprehensive technical specifications, clear battery life metrics, multi-device compatibility details"
   },
   {
     "category": "Fitness",
     "competitor_name": "Manduka PRO Yoga Mat",
+    "ai_preference_score": 0.89,
+    "strengths": "Exact thickness and dimensions, material sustainability details, lifetime warranty clearly stated"
+  },
+  {
+    "category": "Toys, Baby Products, Kids' Fashion",
+    "competitor_name": "LEGO Classic Set",
     "ai_preference_score": 0.92,
-    "strengths": "Explicit dimensions, precise material density specifications, and lifetime warranty details."
+    "strengths": "Clear age appropriateness, exact piece count, safety certifications highlighted"
+  },
+  {
+    "category": "Accessories",
+    "competitor_name": "Fossil Minimalist Wallet",
+    "ai_preference_score": 0.79,
+    "strengths": "Genuine leather certification, exact pocket and slot count, RFID blocking technology specification"
+  },
+  {
+    "category": "Luggage",
+    "competitor_name": "Samsonite Carry-On",
+    "ai_preference_score": 0.93,
+    "strengths": "TSA lock details, airline dimension compliance listed, polycarbonate shell durability specs"
   }
 ]

@@ -38,5 +38,41 @@
   {
     "product_id": "prod_10",
     "updated_text": "Ergonomic wireless mouse with USB receiver, compatible with Windows, Mac, and Linux. Requires 1 AA battery, with a battery life of up to 12 months. Durable design with a lifespan of 5 million clicks. 1-year limited warranty on electronics. Bulk orders welcome, with discounts available for orders over 10 units."
+  },
+  {
+    "product_id": "prod_2",
+    "updated_text": "Premium athletic running shoes designed for daily joggers and runners, featuring high-quality materials, available in various sizes (US 6-12, EU 36-47), weighing 10.5 oz, with a 1-year limited warranty and 30-day free returns."
+  },
+  {
+    "product_id": "live_1777193747189",
+    "updated_text": "Based on our analysis, here is what needs to be improved in this listing:\n1. Critical Gap: Product has no description. An AI shopping agent will have zero data to evaluate this product.\n2. Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.\n3. Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it.\n\nTo fix this product for AI readiness:\n- Add precise dimensions and measurements\n- Resolve any title-description contradictions\n- Add material specifications\n- Ensure the title contains at least 4 descriptive words"
+  },
+  {
+    "product_id": "prod_2",
+    "updated_text": "Premium athletic running shoes designed for daily joggers and runners, featuring high-quality materials, available in various sizes (US 6-12, EU 36-47), weighing 10.5 oz, with a 1-year limited warranty and 30-day free returns."
+  },
+  {
+    "product_id": "prod_4",
+    "updated_text": "The Quantum XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV, manufactured from high-quality ceramic materials, and operates within a temperature range of -20 to 80 degrees Celsius. It is designed for industrial tech manufacturers, with a 1-year limited warranty, and is available for bulk orders with competitive B2B pricing."
+  },
+  {
+    "product_id": "prod_2",
+    "updated_text": "Premium athletic running shoes designed for daily joggers and runners, featuring high-quality materials, available in various sizes (US 6-12, EU 36-47), weighing 10.5 oz, with a 1-year limited warranty and 30-day free returns."
+  },
+  {
+    "product_id": "prod_2",
+    "updated_text": "Premium athletic running shoes designed for daily joggers and runners, featuring high-quality materials, available in various sizes (US 6-12, EU 36-47), weighing 10.5 oz, with a 1-year limited warranty and 30-day free returns."
+  },
+  {
+    "product_id": "prod_3",
+    "updated_text": "Stay stylish with this beautiful brown synthetic leather wallet, measuring 4.5 inches in length and 3.5 inches in width, weighing 6 ounces. Features 6 card slots and a clear ID window. Made from high-quality synthetic leather, this wallet is designed for everyday use and comes with a 1-year limited warranty."
+  },
+  {
+    "product_id": "live_1777194504185",
+    "updated_text": "Based on our analysis, here is what needs to be improved in this listing:\n1. Critical Gap: Product has no description. An AI shopping agent will have zero data to evaluate this product.\n2. Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it.\n3. Trust Gap: Price is highly anomalous (too cheap or excessively expensive with little detail). AI agents will flag as risky.\n4. Critical Gap: Missing product image. AI vision models cannot verify the product, and human buyers won't trust it.\n\nTo fix this product for AI readiness:\n- Add precise dimensions and measurements\n- Resolve any title-description contradictions\n- Add material specifications\n- Ensure the title contains at least 4 descriptive words"
+  },
+  {
+    "product_id": "prod_7",
+    "updated_text": "Our comfortable walking shoes for elderly customers feature breathable mesh uppers, supportive arches, and a cushioned sole for superior comfort. With a range of width options and orthopedic benefits, these shoes are perfect for daily wear. Available in multiple colors to match your style."
   }
 ]

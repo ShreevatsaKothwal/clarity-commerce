@@ -30,11 +30,11 @@ A running record of decisions made during the build. Format: We considered X, ch
 
 ## Auto-Generated Audit Summary
 *(generated from shopmind_results.json)*
-- **Store Readiness Score**: 65.5%
-- **Verdict**: STORE NEEDS IMPROVEMENT
-- **Total Audited**: 5
-- **Priority Breakdown**: CRITICAL: 2, HIGH: 3, MEDIUM: 0
+- **Store Readiness Score**: 22.0%
+- **Verdict**: STORE AT RISK
+- **Total Audited**: 10
+- **Priority Breakdown**: CRITICAL: 7, HIGH: 3, MEDIUM: 0
 
 **Top Critical Products:**
-- Men's Black Leather Wallet
-- Aero Lite Weekend Carry-on Suitcase
+- Shirt
+- Women's running shoes

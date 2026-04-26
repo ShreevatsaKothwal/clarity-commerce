@@ -1,85 +1,85 @@
 [
   {
     "id": "prod_1",
-    "title": "Nomad 30L Travel Backpack",
-    "price": 129.99,
-    "description": "A durable, water-resistant 30L backpack perfect for weekend trips. Features a dedicated 15-inch laptop sleeve, padded shoulder straps, and a breathable mesh back panel. Dimensions: 20 x 13 x 8 inches. Weight: 2.5 lbs.",
+    "title": "Laptop backpack",
+    "price": 3500.0,
     "category": "Bags & Luggage",
-    "merchant_intent": "Sell a high-quality, fully-featured 30-liter travel backpack suitable for tech-savvy travelers taking weekend trips.",
-    "image_url": "https://example.com/images/nomad-backpack.jpg"
+    "description": "Durable 30L travel backpack made from water-resistant 600D polyester. Features a padded compartment for laptops up to 15.6 inches. Dimensions: 18 x 12 x 8 inches. Ideal for daily commuting or weekend travel.",
+    "merchant_intent": "Sell a high-quality, durable travel and commute backpack for young professionals.",
+    "image_url": "https://example.com/images/laptop_backpack.jpg"
   },
   {
     "id": "prod_2",
-    "title": "Running Shoes",
-    "price": 89.99,
-    "merchant_intent": "Sell premium athletic running shoes designed for daily joggers and runners."
+    "title": "Shirt",
+    "price": 299.0,
+    "category": "Men's Fashion",
+    "merchant_intent": "Sell premium cotton formal shirts for corporate professionals"
   },
   {
     "id": "prod_3",
-    "title": "Men's Black Leather Wallet",
-    "price": 45.00,
-    "description": "Stay stylish with this beautiful brown synthetic leather wallet. Features 6 card slots and a clear ID window. Designed for everyday use.",
-    "category": "Accessories",
-    "merchant_intent": "Sell an affordable but stylish men's wallet made of brown synthetic leather for daily casual use."
+    "title": "Women's running shoes",
+    "price": 4200.0,
+    "category": "Footwear",
+    "description": "Lightweight women's running shoes crafted with a breathable mesh upper for maximum ventilation. Available in sizes EU 36-42. Features responsive cushioning and weighs only 220g per shoe. Perfect for marathons or daily jogging.",
+    "merchant_intent": "Sell performance running shoes to serious female athletes.",
+    "image_url": "https://example.com/images/womens_running_shoes.jpg"
   },
   {
     "id": "prod_4",
-    "title": "Quantum XF-900",
-    "price": 899.00,
-    "description": "XF-900 features a hyper-threaded multi-layer capacitive mesh with an output vector of 45 mV. The sub-assembly integration allows for zero-latency phase shifting in the Q-band spectrum. Manufactured in facility 7B.",
-    "category": "Electronics",
-    "merchant_intent": "Sell a high-end, zero-latency phase shifting electronic component to industrial tech manufacturers.",
-    "image_url": "https://example.com/images/xf900.jpg"
+    "title": "Face Cream",
+    "price": 450.0,
+    "category": "Beauty, Health, Grocery",
+    "description": "Good for skin. Apply daily.",
+    "merchant_intent": "Sell an SPF 50 daily moisturizer specifically formulated for dry skin"
   },
   {
     "id": "prod_5",
-    "title": "Aero Lite Weekend Carry-on Suitcase",
-    "price": 150.00,
-    "description": "The perfect lightweight suitcase for your weekend getaways. Features omni-directional spinner wheels, a TSA-approved lock, and a sleek hard-shell exterior. Easily fits in the overhead bin of most major airlines.",
-    "category": "Luggage",
-    "merchant_intent": "Sell a regulation-compatible, lightweight hard-shell carry-on suitcase for frequent airline travelers.",
-    "image_url": "https://example.com/images/aerolite.jpg"
+    "title": "Black Steel Water Bottle",
+    "price": 899.0,
+    "category": "Home, Kitchen, Pets",
+    "description": "This beautiful silver aluminum bottle is lightweight and easy to carry. It's perfect for the gym or office.",
+    "merchant_intent": "Sell a sleek, double-walled insulated stainless steel black water bottle.",
+    "image_url": "https://example.com/images/black_steel_water_bottle.jpg"
   },
   {
     "id": "prod_6",
-    "title": "Sony Noise Cancelling Headphones",
-    "price": 0.01,
-    "description": "Good headphones.",
+    "title": "Headphones",
+    "price": 8500.0,
     "category": "Electronics",
-    "merchant_intent": "Sell high quality over-ear noise cancelling wireless headphones for audiophiles.",
-    "image_url": "https://example.com/images/sony-headphones.jpg"
+    "description": "Experience audio perfection with our hyper-adaptive acoustic mesh. The integrated quantum noise vector cancels out background noise, while the sub-assembly transducer array and capacitive spectrum filter ensure unparalleled fidelity.",
+    "merchant_intent": "Sell noise-cancelling over-ear wireless headphones to audiophiles."
   },
   {
     "id": "prod_7",
-    "title": "Shoes",
-    "price": 50.00,
-    "description": "Comfortable shoes for walking.",
-    "category": "Footwear",
-    "merchant_intent": "Sell casual walking shoes for elderly customers."
+    "title": "Smart Fitness Watch",
+    "price": 6000.0,
+    "category": "Electronics",
+    "description": "Advanced smart fitness watch featuring a 24/7 continuous heart rate monitor and built-in GPS for accurate tracking. 50m water resistance makes it swim-proof. Compatible with iOS and Android devices. Enjoy up to 7 days of battery life on a single charge.",
+    "merchant_intent": "Sell a reliable, feature-packed smartwatch for fitness tracking.",
+    "image_url": "https://example.com/images/smart_fitness_watch.jpg"
   },
   {
     "id": "prod_8",
-    "title": "Smart Watch",
-    "price": 199.99,
-    "description": "Track your fitness with this amazing smart watch. Syncs with your phone.",
-    "category": "Electronics",
-    "merchant_intent": "Sell a fitness-focused smartwatch that integrates with iOS and Android."
+    "title": "Blocks",
+    "price": 0.01,
+    "category": "Toys, Baby Products, Kids' Fashion",
+    "merchant_intent": "Sell premium wooden building blocks for children aged 3-8"
   },
   {
     "id": "prod_9",
-    "title": "Yoga Mat",
-    "price": 25.00,
-    "description": "Non-slip yoga mat. 5mm thickness.",
+    "title": "Premium Yoga Mat",
+    "price": 2500.0,
     "category": "Fitness",
-    "merchant_intent": "Sell a thick, comfortable, non-slip yoga mat for home workouts.",
-    "image_url": "https://example.com/images/yogamat.jpg"
+    "description": "Eco-friendly premium yoga mat made from non-slip natural rubber. Exact dimensions: 183cm x 61cm with a plush 6mm thickness for joint support. Includes a convenient carrying strap for easy transport.",
+    "merchant_intent": "Sell high-end, supportive yoga mats to yoga enthusiasts.",
+    "image_url": "https://example.com/images/premium_yoga_mat.jpg"
   },
   {
     "id": "prod_10",
-    "title": "Wireless Mouse",
-    "price": 15.99,
-    "description": "Ergonomic wireless mouse with USB receiver. Requires 1 AA battery.",
+    "title": "Watch",
+    "price": 15000.0,
     "category": "Electronics",
-    "merchant_intent": "Sell a cheap, reliable ergonomic wireless mouse for office workers."
+    "description": "Nice watch. Looks good. Buy now.",
+    "merchant_intent": "Sell a luxury mechanical analog wristwatch."
   }
 ]
