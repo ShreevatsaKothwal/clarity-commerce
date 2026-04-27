@@ -98,8 +98,6 @@ As commerce shifts from traditional search (Google) to conversational AI, **AI R
 
 ![Product View](./assets/product.png)
 
-*(Add screenshots to the `/assets` folder to display them here)*
-
 ---
 
 ## Demo Instructions
