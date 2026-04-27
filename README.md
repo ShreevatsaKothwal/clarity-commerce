@@ -1,10 +1,10 @@
-# 🛍️ ShopMind: The AI Representation Optimizer
+# ShopMind: The AI Representation Optimizer
 
 **Ensuring your products are seen, understood, and recommended by AI shopping agents.**
 
 ---
 
-## ⚠️ The Problem: The Hidden Revenue Leak
+## The Problem: The Hidden Revenue Leak
 
 We are entering the era of AI Commerce. Consumers are increasingly relying on AI shopping agents, ChatGPT, and smart assistants to find products. 
 
@@ -14,13 +14,13 @@ This is the new SEO—if you aren't optimized for AI, you suffer from a hidden r
 
 ---
 
-## 💡 The Solution: ShopMind
+## The Solution: ShopMind
 
 ShopMind is a **competitive displacement engine** and representation optimizer. It simulates how an AI shopping agent perceives your product listings, identifies where the AI gets confused or rejects your product, and automatically generates actionable fixes to ensure your products win the AI recommendation.
 
 ---
 
-## 🌟 The "Wow" Factor
+## The "Wow" Factor
 
 *   **Dual-Layer Intelligence:** ShopMind doesn't just use an LLM. It combines an AI Simulation Layer (LLM) for nuanced reasoning with a Deterministic Engine for strict, rule-based validation.
 *   **AI Perception Simulation:** We literally simulate the "persona" of an AI shopping assistant to see if it would recommend your product over a competitor's.
@@ -28,7 +28,7 @@ ShopMind is a **competitive displacement engine** and representation optimizer. 
 
 ---
 
-## 🚀 System Workflow
+## System Workflow
 
 Here is how ShopMind processes a store's catalog step-by-step:
 
@@ -43,7 +43,7 @@ Here is how ShopMind processes a store's catalog step-by-step:
 
 ---
 
-## 🏗️ Architecture & Data Flow
+## Architecture & Data Flow
 
 ### System Architecture Workflow
 
@@ -76,7 +76,7 @@ Here is how ShopMind processes a store's catalog step-by-step:
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 *   **Dual-Layer Analysis:** Merges LLM flexibility with deterministic reliability.
 *   **Persona-Based AI Simulation:** Tests products against an AI agent's logic.
@@ -86,13 +86,13 @@ Here is how ShopMind processes a store's catalog step-by-step:
 
 ---
 
-## 🌍 Why This Matters
+## Why This Matters
 
 As commerce shifts from traditional search (Google) to conversational AI, **AI Representation Optimization (AIRO)** is becoming mandatory. Merchants need to know how LLMs perceive their products. ShopMind proves that we can audit, score, and fix product data specifically for AI consumption, ensuring businesses survive the transition to agentic commerce. This isn't just a hackathon project; it's a prototype for the next generation of e-commerce tooling.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ![Dashboard](./assets/dashboard.png)
 
@@ -102,7 +102,7 @@ As commerce shifts from traditional search (Google) to conversational AI, **AI R
 
 ---
 
-## 💻 Demo Instructions
+## Demo Instructions
 
 It takes less than 60 seconds to get ShopMind running.
 
@@ -122,7 +122,7 @@ Navigate to [http://localhost:8000](http://localhost:8000) in your browser.
 
 ---
 
-## 🎯 Demo Flow (For Judges)
+## Demo Flow (For Judges)
 
 When testing the app, follow this flow to experience the full value:
 
@@ -135,7 +135,7 @@ When testing the app, follow this flow to experience the full value:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 *   **Frontend:** Vanilla JavaScript, HTML5, CSS3 (Glassmorphism UI)
 *   **Backend Engine:** Python 3
@@ -144,7 +144,7 @@ When testing the app, follow this flow to experience the full value:
 
 ---
 
-## 🚧 Limitations
+## Limitations
 
 *   Currently uses local JSON files instead of a live database.
 *   E-commerce platform sync (Shopify) is mocked.
@@ -152,7 +152,7 @@ When testing the app, follow this flow to experience the full value:
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 *   **Live Shopify Integration:** Connect via OAuth to pull real products and push real fixes.
 *   **Multi-Agent Simulation:** Simulate different AI personas (e.g., "Budget Shopper AI", "Luxury Shopper AI").
