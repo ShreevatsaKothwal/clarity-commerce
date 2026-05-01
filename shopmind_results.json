@@ -1,14 +1,14 @@
 {
   "store_summary": {
     "store_name": "Clarity Commerce",
-    "store_ai_readiness_score": 22.0,
+    "store_ai_readiness_score": 23.0,
     "total_products_audited": 10,
     "priority_breakdown": {
-      "CRITICAL": 7,
-      "HIGH": 3,
+      "CRITICAL": 6,
+      "HIGH": 4,
       "MEDIUM": 0
     },
-    "avg_impact_score": 0.78,
+    "avg_impact_score": 0.77,
     "store_level_warning": "Store FAQ coverage is 'Low'. AI agents answering buyer questions will find gaps and lose trust.",
     "verdict": "STORE AT RISK"
   },
@@ -30,11 +30,11 @@
         },
         "deal_finder": {
           "verdict": "buy",
-          "reason": "clear material quality and warranty policy"
+          "reason": "clear warranty and return policies, competitive price"
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "lacking color and brand information"
+          "reason": "lacking color and brand information, unclear style and aesthetic"
         }
       },
       "deterministic_issues": [
@@ -42,7 +42,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "Durable 30L travel backpack made from high-quality, water-resistant 600D polyester, weighing 1.2kg. Features a padded compartment for laptops up to 15.6 inches, compliant with major airline carry-on size restrictions. Dimensions: 18 x 12 x 8 inches (45.7 x 30.5 x 20.3 cm). Available in black, navy, and grey. Ideal for daily commuting or weekend travel."
+        "updated_text": "Durable 30L travel backpack made from high-quality, water-resistant 600D polyester, weighing 1.5kg. Features a padded compartment for laptops up to 15.6 inches, compliant with major airline carry-on size restrictions. Available in black, navy, and grey. Dimensions: 18 x 12 x 8 inches (45 x 30 x 20 cm). Ideal for daily commuting or weekend travel."
       }
     },
     {
@@ -58,15 +58,15 @@
       "llm_persona_verdicts": {
         "travel_planner": {
           "verdict": "reject",
-          "reason": "No size or weight information provided"
+          "reason": "no size or weight information"
         },
         "deal_finder": {
           "verdict": "reject",
-          "reason": "Lack of explicit material quality and warranty details"
+          "reason": "no explicit material quality or warranty details"
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "No image or color information provided"
+          "reason": "no image, unclear color or brand matching"
         }
       },
       "deterministic_issues": [
@@ -86,16 +86,30 @@
       "description": "Lightweight women's running shoes crafted with a breathable mesh upper for maximum ventilation. Available in sizes EU 36-42. Features responsive cushioning and weighs only 220g per shoe. Perfect for marathons or daily jogging.",
       "category": "Footwear",
       "price": 4200.0,
-      "priority": "CRITICAL",
-      "impact_score": 0.78,
+      "priority": "HIGH",
+      "impact_score": 0.73,
       "displacement_risk": "SEVERE: An AI shopping agent is highly likely to ignore this product and recommend the 'Nike Revolution 7' instead because of gaps.",
       "competitor_advantage": "Precise weight and drop specifications, clear usage context for runners, extensive user ratings",
-      "llm_persona_verdicts": {},
+      "llm_persona_verdicts": {
+        "fitness_coach": {
+          "verdict": "buy",
+          "reason": "The product description highlights performance features like responsive cushioning and lightweight design, which aligns with the merchant intent."
+        },
+        "casual_wearer": {
+          "verdict": "reject",
+          "reason": "The product description lacks information about style, color options, and daily comfort, which are important factors for casual wearers."
+        },
+        "podiatrist_ai": {
+          "verdict": "reject",
+          "reason": "The product description does not provide sufficient information about arch support, width options, and orthopedic benefits, which are crucial for podiatry recommendations."
+        }
+      },
       "deterministic_issues": [
         "Weak Signal: Product title is too vague (under 4 words). AI agents cannot infer category, use-case, or audience from it."
       ],
       "suggested_fix": {
-        "updated_text": ""
+        "field": "description",
+        "updated_text": "Lightweight women's running shoes crafted with a breathable mesh upper for maximum ventilation, featuring a 10mm sole drop and a supportive arch design. Available in sizes EU 36-42 and three color options. Perfect for marathons or daily jogging, with a focus on comfort, performance, and orthopedic benefits."
       }
     },
     {
@@ -119,7 +133,7 @@
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "no image, unclear color or brand matching, and vague use-cases"
+          "reason": "no image, unclear color, or direct use-cases for aesthetics"
         }
       },
       "deterministic_issues": [
@@ -129,7 +143,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "SPF 50 daily moisturizer specifically formulated for dry skin, 50ml, apply daily for optimal results, with 1-year limited warranty and 30-day free returns."
+        "updated_text": "SPF 50 daily moisturizer for dry skin, 50ml, apply daily for optimal results, with 1-year limited warranty and 30-day free returns."
       }
     },
     {
@@ -149,17 +163,17 @@
         },
         "deal_finder": {
           "verdict": "reject",
-          "reason": "lack of explicit material quality and warranty details"
+          "reason": "material quality and warranty details not clearly stated"
         },
         "stylist": {
           "verdict": "buy",
-          "reason": "aesthetically pleasing product with clear use-cases"
+          "reason": "aesthetics and use-cases are somewhat covered"
         }
       },
       "deterministic_issues": [],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "This sleek, double-walled insulated stainless steel black water bottle is made from high-quality, BPA-free materials and measures 10 inches in height and 3 inches in diameter, weighing 12 ounces. It's perfect for the gym, office, or travel, and comes with a 1-year limited warranty."
+        "updated_text": "This sleek, double-walled insulated stainless steel black water bottle is lightweight (350ml, 27cm tall, 7cm diameter) and easy to carry, perfect for the gym or office, with a 1-year limited warranty."
       }
     },
     {
@@ -183,7 +197,7 @@
         },
         "price_analyst": {
           "verdict": "reject",
-          "reason": "No bulk pricing or explicit warranty coverage mentioned"
+          "reason": "No bulk value, ROI, or explicit warranty coverage mentioned"
         }
       },
       "deterministic_issues": [
@@ -193,7 +207,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "Experience audio perfection with our hyper-adaptive acoustic mesh, featuring a frequency response of 20Hz-20kHz, impedance of 32 ohms, and a signal-to-noise ratio of 100dB. The integrated quantum noise vector cancels out background noise, while the sub-assembly transducer array and capacitive spectrum filter ensure unparalleled fidelity. Compatible with devices supporting aptX, AAC, and SBC codecs. 1-year limited warranty on electronics, with bulk pricing available for orders over 10 units."
+        "updated_text": "Experience audio perfection with our hyper-adaptive acoustic mesh, featuring a frequency response of 20Hz-20kHz, impedance of 32 ohms, and a signal-to-noise ratio of 100dB. The integrated quantum noise vector cancels out background noise, while the sub-assembly transducer array and capacitive spectrum filter ensure unparalleled fidelity. Compatible with a wide range of devices, including smartphones, tablets, and laptops. Bulk orders welcome, with discounts available for quantities over 10 units. 1-year limited warranty on electronics, with dedicated customer support for any questions or concerns."
       }
     },
     {
@@ -227,15 +241,15 @@
       "llm_persona_verdicts": {
         "travel_planner": {
           "verdict": "reject",
-          "reason": "No size or weight information provided"
+          "reason": "no size or weight information"
         },
         "deal_finder": {
           "verdict": "reject",
-          "reason": "Lack of explicit material quality and warranty details"
+          "reason": "no explicit material quality or warranty details"
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "No image or aesthetic description provided"
+          "reason": "no image or aesthetic description"
         }
       },
       "deterministic_issues": [
@@ -246,7 +260,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "Premium wooden building blocks for children aged 3-8, made from high-quality, sustainably-sourced wood. Blocks are 2 inches in length, 1 inch in width, and 0.5 inches in height, weighing 0.2 pounds. Covered by a 1-year limited warranty. Free standard shipping on orders over \u20b9500."
+        "updated_text": "Premium wooden building blocks for children aged 3-8, made from high-quality, sustainably-sourced wood. Blocks are 2 inches in length, 1 inch in width, and 0.5 inches in height, weighing 0.2 pounds. Covered by a 1-year limited warranty."
       }
     },
     {
@@ -266,11 +280,11 @@
         },
         "deal_finder": {
           "verdict": "buy",
-          "reason": "clear material quality and warranty policy"
+          "reason": "clear material quality, price, and warranty information"
         },
         "stylist": {
           "verdict": "reject",
-          "reason": "no color options or brand matching information"
+          "reason": "no color options or brand matching information provided"
         }
       },
       "deterministic_issues": [
@@ -278,7 +292,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "Eco-friendly premium yoga mat made from non-slip natural rubber, available in 5 colors. Exact dimensions: 183cm x 61cm (72\" x 24\") with a plush 6mm thickness for joint support. Weighs 1.5kg. Includes a convenient carrying strap for easy transport and is compatible with most airlines' carry-on size restrictions. 1-year limited warranty on defects."
+        "updated_text": "Eco-friendly premium yoga mat made from non-slip natural rubber, available in 3 colors (black, blue, green). Exact dimensions: 183cm x 61cm (72in x 24in) with a plush 6mm thickness for joint support. Weighs 1.5kg (3.3lbs), perfect for travel. Includes a convenient carrying strap for easy transport and is compatible with most airline carry-on size restrictions."
       }
     },
     {
@@ -313,7 +327,7 @@
       ],
       "suggested_fix": {
         "field": "description",
-        "updated_text": "Luxury mechanical analog wristwatch with 42mm case size, stainless steel band, and 30m water resistance. 1-year limited warranty and 30-day free returns. Price: \u20b915,000. Suitable for formal and business-casual events."
+        "updated_text": "Luxury mechanical analog wristwatch with 42mm case size, stainless steel band, and 30m water resistance. Features a precise mechanical movement and a 2-year battery life. Compatible with standard 20mm watch straps. Bulk orders welcome, with discounts available for quantities over 10 units. 1-year limited warranty and 30-day free returns on unused items."
       }
     }
   ]
