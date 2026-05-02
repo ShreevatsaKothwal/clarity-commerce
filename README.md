@@ -2,6 +2,9 @@
 
 **Ensuring your products are seen, understood, and recommended by AI shopping agents.**
 
+## Demo Video
+[Watch the full demo here](https://drive.google.com/file/d/1xqytpyTwnDJDqAVVBzwENwDK8FpVXlQT/view?usp=sharing)
+
 ---
 
 ## The Problem: The Hidden Revenue Leak
@@ -104,18 +107,24 @@ As commerce shifts from traditional search (Google) to conversational AI, **AI R
 
 It takes less than 60 seconds to get ShopMind running.
 
-**1. Run the Analysis Engine:**
+**1. Setup Environment:**
+```bash
+pip install groq
+export GROQ_API_KEY="your_api_key_here"
+```
+
+**2. Run the Analysis Engine:**
 ```bash
 python3 shopmind_main.py
 ```
 *(This processes the data and generates the AI scores)*
 
-**2. Start the Local Server:**
+**3. Start the Local Server:**
 ```bash
 python3 server.py
 ```
 
-**3. Open the Dashboard:**
+**4. Open the Dashboard:**
 Navigate to [http://localhost:8000](http://localhost:8000) in your browser.
 
 ---
@@ -137,7 +146,7 @@ When testing the app, follow this flow to experience the full value:
 
 *   **Frontend:** Vanilla JavaScript, HTML5, CSS3 (Glassmorphism UI)
 *   **Backend Engine:** Python 3
-*   **AI Integration:** Google Gemini API (LLM Simulation)
+*   **AI Integration:** Groq API (Llama 3.3 70B) (LLM Simulation)
 *   **Data Layer:** JSON (Mocked Database)
 
 ---
@@ -146,7 +155,7 @@ When testing the app, follow this flow to experience the full value:
 
 *   Currently uses local JSON files instead of a live database.
 *   E-commerce platform sync (Shopify) is mocked.
-*   Relies on the Gemini API; requires an active internet connection and valid API key.
+*   Relies on the Groq API (Llama 3.3 70B); requires an active internet connection and valid API key.
 
 ---
 
@@ -156,3 +165,10 @@ When testing the app, follow this flow to experience the full value:
 *   **Multi-Agent Simulation:** Simulate different AI personas (e.g., "Budget Shopper AI", "Luxury Shopper AI").
 *   **Image Analysis:** Use vision models to audit product images for AI readiness.
 *   **Batch Fixing:** Allow merchants to apply AI fixes to hundreds of products with one click.
+
+---
+
+## Contribution Note
+Shreevatsa K led the engineering and technical architecture — backend pipeline design, Python layer implementation, API integration, and system design decisions.
+Ateeb led product thinking, frontend development, and documentation — user journey design, UI/UX implementation, problem framing, scope decisions, and submission documents.
+Both contributed jointly to testing, demo preparation, and final submission.
