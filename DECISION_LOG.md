@@ -1,7 +1,6 @@
 # Decision Log — ClarityCommerce / ShopMind
 
 A running record of every significant decision made during the build.
-Format: We considered X, chose Y, because Z.
 
 ---
 
