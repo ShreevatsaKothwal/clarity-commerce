@@ -46,6 +46,76 @@ ShopMind operates on a highly decoupled, 5-layer pipeline. Each layer has a sing
                     mock_shopify_sync.py → simulated push
 ```
 
+### System Architecture Flow
+
+```mermaid
+flowchart TD
+    A[products.json] --> D
+    B[store_context.json] --> D
+    C[competitor_shadow.json] --> D
+    D[Layer 1: Ingestion\nlayer1_ingestion.py] --> E
+    D --> F
+    E[Layer 2A: LLM Engine\nGroq API — Llama 3.3 70B\n3 AI Buyer Personas]
+    F[Layer 2B: Deterministic Engine\nPure Python — 12 Rules\nNo API needed]
+    E --> G
+    F --> G
+    G[Layer 3: Competitive Displacement Scorer\nimpact score formula\nCRITICAL / HIGH / MEDIUM]
+    G --> H[Layer 5: Store Summary\nStore AI Readiness Score]
+    H --> I[shopmind_results.json]
+    I --> J[server.py — Dashboard]
+    J --> K[Merchant applies fix]
+    K --> L[applied_fixes.json]
+    L --> M[mock_shopify_sync.py]
+```
+
+### Merchant User Journey
+
+```mermaid
+flowchart TD
+
+    A[Merchant opens ShopMind] --> B[Dashboard loads\nStore AI Readiness Score shown]
+
+    B --> C{Store score?}
+
+    C -->|Below 50%| D[STORE AT RISK\nRed gauge]
+    C -->|50-75%| E[NEEDS IMPROVEMENT\nAmber gauge]
+    C -->|Above 75%| F[AI READY\nGreen gauge]
+
+    %% Left Flow (Critical Fix Path)
+    D --> G[Click CRITICAL product card]
+    E --> G
+
+    G --> H[Inspector opens\nAI Persona Verdicts shown]
+
+    H --> I[Travel Planner / Deal Finder / Stylist\nEach shows BUY or REJECT + reason]
+
+    I --> J[Key Issues Detected\nDeterministic engine output]
+
+    J --> K[AI-Optimized Listing shown\nBefore vs After split view]
+
+    %% Right Flow (Add Product Path)
+    F --> L[Click + Add Product]
+
+    L --> M[Fill form\nTitle, Price, Category, Description, Intent]
+
+    M --> N[5 Animated Analysis Steps]
+
+    N --> O[Before vs After result appears]
+
+    %% Merge Point
+    K --> P{Merchant decision}
+    O --> P
+
+    %% Final Decisions
+    P -->|Apply Fix| Q[Card turns FIXED\nGreen badge\nGauge improves]
+
+    P -->|Discard| R[Close modal]
+
+    Q --> S[Click fixed card again]
+
+    S --> T[Optimization Applied View\nOriginal vs Optimized side-by-side]
+```
+
 *   **Layer 1 — Ingestion (`layer1_ingestion.py`):** Loads and merges three JSON data sources into a unified audit context object. This is the only point where file I/O occurs at the start of the pipeline. All subsequent layers receive this in-memory object.
 *   **Layer 2A — LLM Engine (`layer2_llm.py`):** Sends a structured prompt to the Groq API. It instructs the model to simulate three category-aware buyer personas simultaneously and output structured JSON, generating verdicts, reasons, and an optimized listing.
 *   **Layer 2B — Deterministic Engine (`layer2_deterministic.py`):** Pure Python string matching and logical validation running 12 sequential rules. It detects absolute errors like color contradictions, missing policies, and price anomalies, outputting an array of deterministic issues and conversion loss weights.
